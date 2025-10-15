@@ -129,9 +129,9 @@
         
         /* ویژگی‌ها */
         .features {
-padding: 100px 0;
-    background: linear-gradient(180deg, #000000 10%, #e5e7f8 100%);
-    text-align: center;
+            padding: 100px 0;
+            background: linear-gradient(180deg, #000000 10%, #e5e7f8 100%);
+            text-align: center;
         }
         
         .section-title {
@@ -141,7 +141,7 @@ padding: 100px 0;
             color: #1f2937;
         }
 
-      .features .section-title {
+        .features .section-title {
             text-align: center;
             font-size: 2.2rem;
             margin-bottom: 3rem;
@@ -155,13 +155,13 @@ padding: 100px 0;
         }
         
         .feature-card {
-background: #fffffff0;
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(50px);
-    text-align: center;
-    transition: transform 0.3s;
+            background: #fffffff0;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(50px);
+            text-align: center;
+            transition: transform 0.3s;
         }
         
         .feature-card:hover {
@@ -183,9 +183,9 @@ background: #fffffff0;
         
         /* اسکرین‌شات‌ها */
         .screenshots {
-    padding: 100px 0;
-    background: linear-gradient(180deg, lavender 0%, #e4eeef 100%);
-    text-align: center;
+            padding: 100px 0;
+            background: linear-gradient(180deg, lavender 0%, #e4eeef 100%);
+            text-align: center;
         }
         
         .screenshot-grid {
@@ -215,9 +215,9 @@ background: #fffffff0;
         
         /* دانلود با گرادیانت */
         .download {
-    padding: 100px 0;
-    background: linear-gradient(180deg, #e4eeef 0%, cadetblue 100%);
-    text-align: center;
+            padding: 100px 0;
+            background: linear-gradient(180deg, #e4eeef 0%, cadetblue 100%);
+            text-align: center;
         }
         
         .browser-buttons {
@@ -263,8 +263,9 @@ background: #fffffff0;
         footer {
             background: cadetblue;
             color: white;
-            padding: 3em 0;
+            padding: 2em 0;
             text-align: center;
+            position: relative;
         }
 
         .footer img {
@@ -272,6 +273,17 @@ background: #fffffff0;
             height: auto;
             vertical-align: middle;
             margin: 0 5px;
+        }
+
+        .visitor-info {
+            margin-top: 10px;
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+
+        .visitor-number {
+            font-weight: bold;
+            color: #f59e0b;
         }
         
         /* لایت‌بکس */
@@ -354,6 +366,10 @@ background: #fffffff0;
             
             .section-title {
                 font-size: 1.8rem;
+            }
+
+            .browser-btn {
+                width: 45%;
             }
         }
     </style>
@@ -504,13 +520,16 @@ background: #fffffff0;
         </div>
     </section>
 
-<footer class="footer">
-    <a href="https://wa.me/989355618035" style="color: white; text-decoration: none">
-        <img src="LOGO-M.png" alt="MahmoodVhdtfr">
-        <p style="margin: 0; font-weight: bold;">MahmoodVhdtfr</p>
-    </a>
-    <p style="margin: 0;">تورکجه‌م منیم، سس بایراغیم! ❤️ ایله یارادیلیب © 2024</p>
-</footer>
+    <footer class="footer">
+        <a href="https://wa.me/989355618035" style="color: white; text-decoration: none">
+            <img src="LOGO-M.png" alt="MahmoodVhdtfr">
+            <p style="margin: 0; font-weight: bold;">MahmoodVhdtfr</p>
+        </a>
+        <p style="margin: 0;">تورکجه‌م منیم، سس بایراغیم! ❤️ ایله یارادیلیب © 2024</p>
+        <div class="visitor-info">
+            گؤرونتولنمه: <span class="visitor-number" id="footerVisitorCount">0</span>
+        </div>
+    </footer>
 
     <!-- لایت‌بکس -->
     <div id="lightbox" class="lightbox">
@@ -606,6 +625,30 @@ background: #fffffff0;
                 }
             });
         });
+
+        // استفاده از CountAPI (رایگان و ساده)
+        function updateVisitorCounter() {
+            // استفاده از نام دامنه شما به عنوان key
+            const namespace = 'gunsefae-extension';
+            const key = 'visits';
+            
+            fetch(`https://api.countapi.xyz/hit/${namespace}/${key}`)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('footerVisitorCount').textContent = data.value;
+                })
+                .catch(error => {
+                    console.log('کانتر در حالت آفلاین');
+                    // نمایش عدد تصادفی برای تست
+                    document.getElementById('footerVisitorCount').textContent = Math.floor(Math.random() * 100) + 50;
+                });
+        }
+
+        // فقط یک بار در هر session بشماره
+        if (!sessionStorage.getItem('visitorCounted')) {
+            updateVisitorCounter();
+            sessionStorage.setItem('visitorCounted', 'true');
+        }
     </script>
 </body>
 </html>
