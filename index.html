@@ -1,55 +1,24 @@
-
 <!DOCTYPE html>
 <html lang="az" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mahmood Vahdatfar | MahmoodVhdtfr</title>  <link rel="icon" type="image/x-icon" href="favicon.png">
+    <title>گونشفای - شخصی‌لشدیریلمیش ائو ائکرانی | MahmoodVhdtfr</title>
+    <link rel="icon" type="image/x-icon" href="favicon.png">
     <style>
-	
-	@font-face {
-  font-family: 'MV';
-  src: url('MV.woff') format('woff');
-  font-display: swap;
-}
-
-	.header-actions {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
-
-.coffee-btn {
-    background: cadetblue;
-    color: white;
-    padding: 2px 25px;
-    border-radius: 25px;
-    text-decoration: none;
-    font-family: sans-serif;
-    font-size: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(10px);
-}
-
-.coffee-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1),
-    0 0 0 1px rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-}
-	
-        /* Reset and Base Styles */
+        /* فونت و ریست */
+        @font-face {
+            font-family: 'MV';
+            src: url('MV.woff') format('woff');
+            font-display: swap;
+        }
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
+        
         :root {
             --primary: #2563eb;
             --primary-dark: #1d4ed8;
@@ -60,160 +29,161 @@
             --background-alt: #f8fafc;
             --border: #e5e7eb;
         }
-
+        
         body {
             font-family: 'MV', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
             color: var(--text);
             background: var(--background);
         }
-
+        
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
         }
-
-        /* Header Styles */
+        
+        /* هدر */
         header {
-            /* background: #111111b0;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);*/
             position: absolute;
             width: 100%;
             top: 0;
             z-index: 1000;
         }
-
-        nav {
+        
+        .header-container {
+            max-width: 95%;
+            margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0.3rem  0;
+            padding: 8px 10px;
         }
-
-        .logo {
+        
+        .logo-section {
             display: flex;
             align-items: center;
             gap: 10px;
-            font-size: 1.5rem;
+        }
+        
+        .logo-text {
+            font-family: system-ui;
+            font-size: 1em;
             font-weight: bold;
-            color: var(--primary);
+            background: #FFF;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
-
-
-.logo img {
-    width: 65px;
-    height: auto;
-}
+        
+        .logo img {
+            width: 65px;
+            height: auto;
         }
-
-        .nav-links {
+        
+        .header-actions {
             display: flex;
-            gap: 2rem;
-            list-style: none;
+            align-items: center;
+            gap: 15px;
         }
-
-        .nav-links a {
+        
+        .coffee-btn {
+            background: cadetblue;
+            color: white;
+            padding: 2px 25px;
+            border-radius: 25px;
             text-decoration: none;
-            color: var(--text);
-            font-weight: 500;
-            transition: color 0.3s;
+            font-family: sans-serif;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
         }
-
-        .nav-links a:hover {
-            color: var(--primary);
+        
+        .coffee-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.2);
         }
-
-        /* Hero Section */
-.hero {
-    background-image: url(bg.jpg);
-    background-repeat: no-repeat;
-    background-color: rgb(0 0 0 / 40%);
-    background-blend-mode: darken;
-    background-size: cover;
-    background-attachment: fixed;
-    background-position: top;
-    color: white;
-    padding: 90px 0 90px;
-    text-align: center;
-}
-.hero h1 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-    margin-top: -1rem;
-    text-shadow: 1px 1px 5px black;
-}
-
-        .h2 {
-            font-size: 3rem;
+        
+        /* بخش هیرو */
+        .hero {
+            background-image: url(bg.jpg);
+            background-repeat: no-repeat;
+            background-color: rgba(0, 0, 0, 0.4);
+            background-blend-mode: darken;
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: top;
+            color: white;
+            padding: 90px 0 90px;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 2rem;
             margin-bottom: 1rem;
-			    margin-top: -2rem;
-			    text-shadow: 1px 1px 5px black;
-        }		
-
-.hero p
-Specificity: (0,1,1)
- {
-    font-size: 1.2em;
-    font-weight: 800;
-    margin-bottom: 4rem;
-    margin-top: 2rem;
-    color: #fff;
-}
-
+            margin-top: -1rem;
+            text-shadow: 1px 1px 5px black;
+        }
+        
+        .hero p {
+            font-size: 1.2em;
+            font-weight: 800;
+            margin-bottom: 4rem;
+            margin-top: 2rem;
+            color: #fff;
+        }
+        
         .cta-buttons {
             display: flex;
             gap: 10rem;
             justify-content: center;
             flex-wrap: wrap;
         }
-
+        
         .btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 12px 24px;
-    background: white;
-    color: black;
-    text-decoration: none;
-    border-radius: 8px;
-    font-weight: 600;
-    transition: all 0.3s;
-    border: none;
-    cursor: pointer;
-    font-size: 19px;
-    line-height: 1.2em;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: white;
+            color: black;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 19px;
+            line-height: 1.2em;
         }
-
+        
         .btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 20px rgba(0,0,0,0.2);
         }
-
-        .btn-outline {
-            background: transparent;
-            border: 2px solid white;
-        }
-
-        /* Features Section */
+        
+        /* بخش ویژگی‌ها */
         .features {
             padding: 80px 0;
             background: powderblue;
         }
-
+        
         .section-title {
             text-align: center;
             font-size: 2.5rem;
             margin-bottom: 3rem;
             color: var(--text);
         }
-
+        
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
         }
-
+        
         .feature-card {
             background: rgba(0, 0, 0, 0.1);
             padding: 2rem;
@@ -222,11 +192,11 @@ Specificity: (0,1,1)
             text-align: center;
             transition: transform 0.3s;
         }
-
+        
         .feature-card:hover {
             transform: translateY(-5px);
         }
-
+        
         .feature-icon {
             width: 60px;
             height: 60px;
@@ -239,38 +209,44 @@ Specificity: (0,1,1)
             color: white;
             font-size: 1.5rem;
         }
-
-        /* Screenshots Section */
+        
+        /* بخش اسکرین‌شات‌ها */
         .screenshots {
             padding: 80px 0;
         }
-
+        
         .screenshot-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
             margin-top: 3rem;
         }
-
+        
         .screenshot-item {
             border-radius: 12px;
             overflow: hidden;
             box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: transform 0.3s;
         }
-
+        
+        .screenshot-item:hover {
+            transform: scale(1.05);
+        }
+        
         .screenshot-item img {
             width: 100%;
             height: auto;
             display: block;
         }
-
-        /* Download Section */
+        
+        /* بخش دانلود */
         .download {
             padding: 80px 0;
             background: var(--background-alt);
             text-align: center;
         }
-
+        
         .browser-buttons {
             display: flex;
             justify-content: center;
@@ -278,7 +254,7 @@ Specificity: (0,1,1)
             flex-wrap: wrap;
             margin-top: 2rem;
         }
-
+        
         .browser-btn {
             display: flex;
             flex-direction: column;
@@ -293,100 +269,153 @@ Specificity: (0,1,1)
             min-width: 150px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.05);
         }
-
+        
         .browser-btn:hover {
             transform: translateY(-5px);
             box-shadow: 0 8px 20px rgba(0,0,0,0.1);
         }
-
+        
         .browser-icon {
             width: 48px;
             height: 48px;
-            font-size: 2rem;
         }
-
-        /* Footer */
+        
+        .browser-icon img {
+            width: 100%;
+            height: auto;
+        }
+        
+        /* فوتر */
         footer {
             background: cadetblue;
             color: white;
             padding: 1em 0;
             text-align: center;
         }
-
-        /* Responsive */
+        
+        /* لایت‌بکس */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 10px;
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+        }
+        
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            background: rgba(0, 0, 0, 0.5);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s;
+        }
+        
+        .lightbox-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.1);
+        }
+        
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            transform: translateY(-50%);
+        }
+        
+        .lightbox-prev, .lightbox-next {
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            background: rgba(0, 0, 0, 0.5);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s;
+        }
+        
+        .lightbox-prev:hover, .lightbox-next:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.1);
+        }
+        
+        /* رسپانسیو */
         @media (max-width: 768px) {
             .hero h1 {
-                font-size: 2rem;
+                font-size: 1.5rem;
             }
             
-            .nav-links {
-                display: none;
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .cta-buttons {
+                gap: 2rem;
             }
             
             .features-grid,
             .screenshot-grid {
                 grid-template-columns: 1fr;
             }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .header-container {
+                max-width: 90%;
+                padding: 0 5px;
+            }
         }
-		.main-header {
-    padding-top: 8px;
-    padding-bottom: 8px;
-    z-index: 1000;
-}
-
-  .header-container {
-  max-width: 95%;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 10px;
-}
-  .header-container {
-    max-width: 90%;
-    padding: 0 5px;
-  }
-  
-.logo-text {
-    font-family: system-ui;
-    font-size: 1em;
-    font-weight: bold;
-    background: #FFF;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-
-.logo-section {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
     </style>
 </head>
 <body>
-    <!-- Header -->
-  <header class="main-header">
-    <div class="header-container">
-      <!-- لوگو ساغ طرفده -->
-	        <div class="header-actions">
-        <!-- منی بیر چایا قوناق ائله دؤیمه‌سی -->
-        <a href="https://daramet.com/MahmoodVhdtfr" 
-           target="_blank" 
-           rel="noopener noreferrer"
-           class="coffee-btn">
-                      <span class="coffee-text">Buy Me a Cup of Tea</span><h2>🍵</h2>
-        </a>
-      </div>
+    <!-- هدر -->
+    <header class="main-header">
+        <div class="header-container">
+            <div class="header-actions">
+                <a href="https://daramet.com/MahmoodVhdtfr" target="_blank" rel="noopener noreferrer" class="coffee-btn">
+                    <span class="coffee-text">Buy Me a Cup of Tea</span>
+                    <span>🍵</span>
+                </a>
+            </div>
+            
+            <div class="logo-section">
+                <div class="logo">
+                    <span class="logo-text">MahmoodVhdtfr</span>
+                    <img src="LOGO-M.png" alt="MahmoodVhdtfr">
+                </div>
+            </div>
+        </div>
+    </header>
 
-      
-      <!-- سول طرفده ایستیفاده‌چی دؤیمهلری -->
-      <div class="logo-section">
-        <div class="logo"><span class="logo-text">MahmoodVhdtfr</span><img src="LOGO-M.png" alt="MahmoodVhdtfr"></div>
-        
-      </div>
-    </div>
-  </header>
-
-    <!-- Hero Section -->
+    <!-- بخش هیرو -->
     <section class="hero">
         <div class="container">
             <img src="Logo.png" alt="گونشفای" style="width:180px;height:auto;">
@@ -394,26 +423,25 @@ Specificity: (0,1,1)
             <p>هر دفعه یئنی بیر تب آچاندا، اؤزل و عاغیللی بیر صفحه ایله قارشیلاشین</p>
             <div class="cta-buttons">
                 <a href="#features" class="btn">🛸 اؤزللیک لر</a>
-				                <a href="#download" class="btn">🚀 ائندیرین</a>
-
+                <a href="#download" class="btn">🚀 ائندیرین</a>
             </div>
         </div>
     </section>
 
-    <!-- Features Section -->
+    <!-- بخش ویژگی‌ها -->
     <section id="features" class="features">
         <div class="container">
             <h2 class="section-title">اؤزللیک لر</h2>
             <div class="features-grid">
-			    <div class="feature-card">
-					<div class="feature-icon">☁️</div>
-					<h3>هاوا دورومو</h3>
-                    <p>آذربایجان شهرلرینین  آنلیق و گله‌جک هاوا دورومو</p>
+                <div class="feature-card">
+                    <div class="feature-icon">☁️</div>
+                    <h3>هاوا دورومو</h3>
+                    <p>آذربایجان شهرلرینین آنلیق و گله‌جک هاوا دورومو</p>
                 </div>
-				
-			    <div class="feature-card">
-					<div class="feature-icon">⏰</div>
-					<h3>ساعات و تاریخ</h3>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">⏰</div>
+                    <h3>ساعات و تاریخ</h3>
                     <p>آذربایجان واختی ایله ساعات و تورکجه گون سایار</p>
                 </div>
 
@@ -422,8 +450,9 @@ Specificity: (0,1,1)
                     <h3>پارا پول</h3>
                     <p>آنلیق اولاراق ارز مزدننه‌لرینی ایزله‌ین</p>
                 </div>
+                
                 <div class="feature-card">
-				    <div class="feature-icon">📒</div>
+                    <div class="feature-icon">📒</div>
                     <h3>نوت‌لار</h3>
                     <p>آغلینیزا گلن فیکیرلرینیزی ایتیرمه‌ین</p>
                 </div>
@@ -433,16 +462,19 @@ Specificity: (0,1,1)
                     <h3>گونده‌لیک تاپشیریقلار</h3>
                     <p>گۆندلیک تاپشیریقلارینیزی ایداره ائدین</p>
                 </div>
+                
                 <div class="feature-card">
                     <div class="feature-icon">🔖</div>
                     <h3>تئز کئچیدلر</h3>
                     <p>سئچیلمیش سایتلارا راحاتجا اولاشین</p>
                 </div>
+                
                 <div class="feature-card">
                     <div class="feature-icon">🔄</div>
                     <h3>چئویری</h3>
                     <p>اورخون الیفباسیندان لاتینه و عکسینه چئویرمه</p>
                 </div>
+                
                 <div class="feature-card">
                     <div class="feature-icon">🔍</div>
                     <h3>سورعتلی آختاریش</h3>
@@ -452,46 +484,43 @@ Specificity: (0,1,1)
         </div>
     </section>
 
-    <!-- Screenshots Section -->
+    <!-- بخش اسکرین‌شات‌ها -->
     <section id="screenshots" class="screenshots">
         <div class="container">
             <h2 class="section-title">ائکران گؤرونتولری</h2>
             <div class="screenshot-grid">
-                <!-- اسکرین‌شات 1 -->
-                <div class="screenshot-item">
-                    <img src="1.png" alt="گونشفای اصلی ائکران" onerror="this.style.backgroundColor='#e5e7eb';this.style.minHeight='200px'">
+                <div class="screenshot-item lightbox-trigger">
+                    <img src="1.png" alt="گونشفای اصلی ائکران" data-index="0">
                 </div>
-                <!-- اسکرین‌شات 2 -->
-                <div class="screenshot-item">
-                    <img src="2.png" alt="نوتلار بخشی" onerror="this.style.backgroundColor='#e5e7eb';this.style.minHeight='200px'">
+                <div class="screenshot-item lightbox-trigger">
+                    <img src="2.png" alt="نوتلار بخشی" data-index="1">
                 </div>
-                <!-- اسکرین‌شات 3 -->
-								                <div class="screenshot-item">
-                    <img src="3.png" alt="ویجتلر" onerror="this.style.backgroundColor='#e5e7eb';this.style.minHeight='200px'">
+                <div class="screenshot-item lightbox-trigger">
+                    <img src="3.png" alt="ویجتلر" data-index="2">
                 </div>
-                <div class="screenshot-item">
-                    <img src="4.png" alt="ویجتلر" onerror="this.style.backgroundColor='#e5e7eb';this.style.minHeight='200px'">
+                <div class="screenshot-item lightbox-trigger">
+                    <img src="4.png" alt="ویجتلر" data-index="3">
                 </div>
-				                <div class="screenshot-item">
-                    <img src="5.png" alt="ویجتلر" onerror="this.style.backgroundColor='#e5e7eb';this.style.minHeight='200px'">
+                <div class="screenshot-item lightbox-trigger">
+                    <img src="5.png" alt="ویجتلر" data-index="4">
                 </div>
-				                <div class="screenshot-item">
-                    <img src="6.png" alt="ویجتلر" onerror="this.style.backgroundColor='#e5e7eb';this.style.minHeight='200px'">
+                <div class="screenshot-item lightbox-trigger">
+                    <img src="6.png" alt="ویجتلر" data-index="5">
                 </div>
-				                <div class="screenshot-item">
-                    <img src="7.png" alt="ویجتلر" onerror="this.style.backgroundColor='#e5e7eb';this.style.minHeight='200px'">
+                <div class="screenshot-item lightbox-trigger">
+                    <img src="7.png" alt="ویجتلر" data-index="6">
                 </div>
-				                <div class="screenshot-item">
-                    <img src="8.png" alt="ویجتلر" onerror="this.style.backgroundColor='#e5e7eb';this.style.minHeight='200px'">
+                <div class="screenshot-item lightbox-trigger">
+                    <img src="8.png" alt="ویجتلر" data-index="7">
                 </div>
-								                <div class="screenshot-item">
-                    <img src="9.png" alt="ویجتلر" onerror="this.style.backgroundColor='#e5e7eb';this.style.minHeight='200px'">
+                <div class="screenshot-item lightbox-trigger">
+                    <img src="9.png" alt="ویجتلر" data-index="8">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Download Section -->
+    <!-- بخش دانلود -->
     <section id="download" class="download">
         <div class="container">
             <h2 class="section-title">ائندیرین</h2>
@@ -499,30 +528,124 @@ Specificity: (0,1,1)
             
             <div class="browser-buttons">
                 <a href="https://microsoftedge.microsoft.com/addons/detail/%DA%AF%D9%88%D9%86%D8%B4%D9%81%D8%A7%DB%8C-%D8%B4%D8%AE%D8%B5%DB%8C%E2%80%8C%D9%84%D8%B4%D8%AF%DB%8C%D8%B1%DB%8C%D9%84%D9%85%DB%8C%D8%B4/gmfcdllbndaablojakebabbimcnilhpe" class="browser-btn">
-                    <div class="browser-icon"><img src="Microsoft Edge.png" style="width:48px;height:auto;"></div>
+                    <div class="browser-icon"><img src="Microsoft Edge.png" alt="Microsoft Edge"></div>
                     <span>Microsoft Edge</span>
                 </a>
                 <a href="https://addons.mozilla.org/en-US/firefox/addon/%DA%AF%D9%88%D9%86%D8%B4%D9%81%D8%A7%DB%8C-%D8%B4%D8%AE%D8%B5%DB%8C-%D8%A7%D8%A6%D9%88-%D8%A7%D8%A6%DA%A9%D8%B1%D8%A7%D9%86%DB%8C/" class="browser-btn">
-                    <div class="browser-icon"><img src="mozila.png" style="width:48px;height:auto;"></div>
+                    <div class="browser-icon"><img src="mozila.png" alt="Firefox"></div>
                     <span>Firefox</span>
                 </a>
                 <a href="#" class="browser-btn">
-                    <div class="browser-icon"><img src="Opera.png" style="width:48px;height:auto;"></div>
+                    <div class="browser-icon"><img src="Opera.png" alt="Opera"></div>
                     <span>Opera</span>
                 </a>
                 <a href="#" class="browser-btn">
-                    <div class="browser-icon"><img src="Chrome.png" style="width:48px;height:auto;"></div>
+                    <div class="browser-icon"><img src="Chrome.png" alt="Chrome"></div>
                     <span>Chrome</span>
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-<footer class="footer">
-<p>تورکجه‌م منیم، سس بایراغیم! ❤️ ایله یارادیلیب  | MahmoodVhdtfr ©  2024 </p>    </footer>
+    <!-- فوتر -->
+    <footer class="footer">
+        <p>تورکجه‌م منیم، سس بایراغیم! ❤️ ایله یارادیلیب | MahmoodVhdtfr © 2024</p>
+    </footer>
+
+    <!-- لایت‌بکس -->
+    <div id="lightbox" class="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <div class="lightbox-nav">
+            <span class="lightbox-prev">&#10094;</span>
+            <span class="lightbox-next">&#10095;</span>
+        </div>
+        <img class="lightbox-content" id="lightbox-img" src="" alt="">
+    </div>
+
     <script>
-        // Smooth scroll for navigation links
+        // لایت‌بکس
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxClose = document.querySelector('.lightbox-close');
+        const lightboxPrev = document.querySelector('.lightbox-prev');
+        const lightboxNext = document.querySelector('.lightbox-next');
+        const triggers = document.querySelectorAll('.lightbox-trigger');
+        
+        let currentIndex = 0;
+        const images = [];
+
+        // جمع‌آوری تمام تصاویر
+        triggers.forEach(trigger => {
+            const img = trigger.querySelector('img');
+            images.push({
+                src: img.src,
+                alt: img.alt
+            });
+        });
+
+        // باز کردن لایت‌بکس
+        triggers.forEach(trigger => {
+            trigger.addEventListener('click', function() {
+                const index = parseInt(this.querySelector('img').getAttribute('data-index'));
+                currentIndex = index;
+                updateLightboxImage();
+                lightbox.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        // بستن لایت‌بکس
+        lightboxClose.addEventListener('click', closeLightbox);
+        lightbox.addEventListener('click', function(e) {
+            if (e.target === lightbox) {
+                closeLightbox();
+            }
+        });
+
+        // ناوبری قبلی/بعدی
+        lightboxPrev.addEventListener('click', function(e) {
+            e.stopPropagation();
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            updateLightboxImage();
+        });
+
+        lightboxNext.addEventListener('click', function(e) {
+            e.stopPropagation();
+            currentIndex = (currentIndex + 1) % images.length;
+            updateLightboxImage();
+        });
+
+        // کلیدهای کیبورد
+        document.addEventListener('keydown', function(e) {
+            if (lightbox.style.display === 'flex') {
+                switch(e.key) {
+                    case 'Escape':
+                        closeLightbox();
+                        break;
+                    case 'ArrowLeft':
+                        currentIndex = (currentIndex - 1 + images.length) % images.length;
+                        updateLightboxImage();
+                        break;
+                    case 'ArrowRight':
+                        currentIndex = (currentIndex + 1) % images.length;
+                        updateLightboxImage();
+                        break;
+                }
+            }
+        });
+
+        // توابع کمکی
+        function updateLightboxImage() {
+            lightboxImg.src = images[currentIndex].src;
+            lightboxImg.alt = images[currentIndex].alt;
+        }
+
+        function closeLightbox() {
+            lightbox.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // اسکرول نرم
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -536,14 +659,14 @@ Specificity: (0,1,1)
             });
         });
 
-        // Add scroll effect to header
+        // افکت هدر هنگام اسکرول
         window.addEventListener('scroll', function() {
             const header = document.querySelector('header');
             if (window.scrollY > 100) {
-                header.style.background = black;
+                header.style.background = 'rgba(0, 0, 0, 0.8)';
                 header.style.backdropFilter = 'blur(10px)';
             } else {
-                header.style.background = black;
+                header.style.background = 'transparent';
                 header.style.backdropFilter = 'none';
             }
         });
