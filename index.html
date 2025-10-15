@@ -6,7 +6,6 @@
     <title>گونشفای - شخصی‌لشدیریلمیش ائو ائکرانی | MahmoodVhdtfr</title>
     <link rel="icon" type="image/x-icon" href="favicon.png">
     <style>
-        /* فونت و ریست */
         @font-face {
             font-family: 'MV';
             src: url('MV.woff') format('woff');
@@ -19,23 +18,11 @@
             box-sizing: border-box;
         }
         
-        :root {
-            --primary: #2563eb;
-            --primary-dark: #1d4ed8;
-            --secondary: #f59e0b;
-            --text: #1f2937;
-            --text-light: #6b7280;
-            --background: #ffffff;
-            --background-alt: #f8fafc;
-            --border: #e5e7eb;
-        }
-        
         body {
             font-family: 'MV', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
-            color: var(--text);
-            background: var(--background);
-            overflow-x: hidden;
+            color: #1f2937;
+            background: #ffffff;
         }
         
         .container {
@@ -46,12 +33,11 @@
         
         /* هدر */
         .main-header {
-            padding-top: 8px;
-            padding-bottom: 8px;
-            z-index: 1000;
+            padding: 15px 0;
             position: absolute;
             width: 100%;
             top: 0;
+            z-index: 1000;
         }
 
         .header-container {
@@ -60,39 +46,18 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 10px;
+            padding: 0 20px;
         }
 
-        .logo-section {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--primary);
-        }
-        
         .logo img {
             width: 65px;
             height: auto;
         }
 
-        .header-actions {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
         .coffee-btn {
             background: cadetblue;
             color: white;
-            padding: 5px 25px;
+            padding: 8px 20px;
             border-radius: 25px;
             text-decoration: none;
             font-family: sans-serif;
@@ -101,49 +66,44 @@
             align-items: center;
             gap: 5px;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
         }
 
         .coffee-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.2);
         }
         
-        /* بخش هیرو */
+        /* بخش‌ها بدون margin */
+        section {
+            margin: 0;
+            border: none;
+        }
+        
+        /* هیرو */
         .hero {
             background-image: url(bg.jpg);
-            background-repeat: no-repeat;
-            background-color: rgba(0, 0, 0, 0.4);
-            background-blend-mode: darken;
             background-size: cover;
-            background-attachment: fixed;
             background-position: top;
             color: white;
-            padding: 120px 0 180px;
+            padding: 150px 0 100px;
             text-align: center;
-            position: relative;
-            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
         }
         
         .hero h1 {
-            font-size: 2rem;
+            font-size: 2.2rem;
             margin-bottom: 1rem;
-            margin-top: -1rem;
             text-shadow: 1px 1px 5px black;
         }
         
         .hero p {
             font-size: 1.2em;
             font-weight: 800;
-            margin-bottom: 4rem;
-            margin-top: 2rem;
+            margin-bottom: 3rem;
             color: #fff;
         }
         
         .cta-buttons {
             display: flex;
-            gap: 10rem;
+            gap: 2rem;
             justify-content: center;
             flex-wrap: wrap;
         }
@@ -159,31 +119,24 @@
             border-radius: 8px;
             font-weight: 600;
             transition: all 0.3s;
-            border: none;
-            cursor: pointer;
-            font-size: 19px;
-            line-height: 1.2em;
+            font-size: 18px;
         }
         
         .btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
         }
         
-        /* بخش ویژگی‌ها */
+        /* ویژگی‌ها */
         .features {
-            padding: 180px 0 150px;
+            padding: 100px 0;
             background: lavender;
-            position: relative;
-            margin-top: -100px;
-            clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
         }
         
         .section-title {
             text-align: center;
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             margin-bottom: 3rem;
-            color: var(--text);
+            color: #1f2937;
         }
         
         .features-grid {
@@ -193,42 +146,35 @@
         }
         
         .feature-card {
-            background: rgba(255, 255, 255, 0.95);
+            background: white;
             padding: 2rem;
-            border-radius: 16px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             text-align: center;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s;
         }
         
         .feature-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 16px 40px rgba(0,0,0,0.15);
+            transform: translateY(-5px);
         }
         
         .feature-icon {
-            width: 70px;
-            height: 70px;
-            margin: 0 auto 1.5rem;
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1rem;
+            background: #2563eb;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 1.8rem;
-            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+            font-size: 1.5rem;
         }
         
-        /* بخش اسکرین‌شات‌ها */
+        /* اسکرین‌شات‌ها */
         .screenshots {
-            padding: 150px 0 120px;
+            padding: 100px 0;
             background: white;
-            position: relative;
-            margin-top: -80px;
-            clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%);
         }
         
         .screenshot-grid {
@@ -239,64 +185,34 @@
         }
         
         .screenshot-item {
-            border-radius: 16px;
+            border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
             cursor: pointer;
-            transition: all 0.4s ease;
-            background: white;
-            position: relative;
-        }
-        
-        .screenshot-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(45deg, rgba(37, 99, 235, 0.1), rgba(245, 158, 11, 0.1));
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            z-index: 1;
+            transition: transform 0.3s;
         }
         
         .screenshot-item:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
-        }
-        
-        .screenshot-item:hover::before {
-            opacity: 1;
+            transform: scale(1.05);
         }
         
         .screenshot-item img {
             width: 100%;
             height: auto;
             display: block;
-            transition: transform 0.4s ease;
-            position: relative;
-            z-index: 0;
         }
         
-        .screenshot-item:hover img {
-            transform: scale(1.05);
-        }
-        
-        /* بخش دانلود */
+        /* دانلود */
         .download {
-            padding: 120px 0 100px;
-            background: var(--background-alt);
+            padding: 100px 0;
+            background: #f8fafc;
             text-align: center;
-            position: relative;
-            margin-top: -60px;
-            clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
         }
         
         .browser-buttons {
             display: flex;
             justify-content: center;
-            gap: 1.5rem;
+            gap: 1rem;
             flex-wrap: wrap;
             margin-top: 2rem;
         }
@@ -305,32 +221,24 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 12px;
-            padding: 2rem 1.5rem;
+            gap: 10px;
+            padding: 1.5rem;
             background: white;
-            border-radius: 16px;
+            border-radius: 12px;
             text-decoration: none;
-            color: var(--text);
-            transition: all 0.3s ease;
-            min-width: 160px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: #1f2937;
+            transition: all 0.3s;
+            min-width: 150px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
         }
         
         .browser-btn:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 16px 40px rgba(0,0,0,0.15);
-            background: linear-gradient(135deg, white, #f8fafc);
+            transform: translateY(-5px);
         }
         
         .browser-icon {
-            width: 56px;
-            height: 56px;
-            transition: transform 0.3s ease;
-        }
-        
-        .browser-btn:hover .browser-icon {
-            transform: scale(1.1);
+            width: 48px;
+            height: 48px;
         }
         
         .browser-icon img {
@@ -342,10 +250,8 @@
         footer {
             background: cadetblue;
             color: white;
-            padding: 3em 0 1.5em;
+            padding: 3em 0;
             text-align: center;
-            position: relative;
-            margin-top: -50px;
         }
 
         .footer img {
@@ -363,54 +269,32 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.95);
+            background: rgba(0, 0, 0, 0.9);
             z-index: 2000;
             justify-content: center;
             align-items: center;
-            backdrop-filter: blur(10px);
         }
         
         .lightbox-content {
-            max-width: 85%;
-            max-height: 85%;
-            border-radius: 20px;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
-            animation: zoomIn 0.3s ease;
-        }
-        
-        @keyframes zoomIn {
-            from {
-                opacity: 0;
-                transform: scale(0.8);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 10px;
         }
         
         .lightbox-close {
             position: absolute;
-            top: 30px;
-            right: 30px;
+            top: 20px;
+            right: 20px;
             color: white;
-            font-size: 2.5rem;
+            font-size: 2rem;
             cursor: pointer;
-            background: rgba(0, 0, 0, 0.6);
-            width: 60px;
-            height: 60px;
+            background: rgba(0, 0, 0, 0.5);
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
-            transition: all 0.3s;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-        }
-        
-        .lightbox-close:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: scale(1.1) rotate(90deg);
-            border-color: rgba(255, 255, 255, 0.6);
         }
         
         .lightbox-nav {
@@ -419,35 +303,27 @@
             width: 100%;
             display: flex;
             justify-content: space-between;
-            padding: 0 30px;
+            padding: 0 20px;
             transform: translateY(-50%);
         }
         
         .lightbox-prev, .lightbox-next {
             color: white;
-            font-size: 2.5rem;
+            font-size: 2rem;
             cursor: pointer;
-            background: rgba(0, 0, 0, 0.6);
-            width: 60px;
-            height: 60px;
+            background: rgba(0, 0, 0, 0.5);
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
-            transition: all 0.3s;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-        }
-        
-        .lightbox-prev:hover, .lightbox-next:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: scale(1.1);
-            border-color: rgba(255, 255, 255, 0.6);
         }
         
         /* رسپانسیو */
         @media (max-width: 768px) {
             .hero h1 {
-                font-size: 1.5rem;
+                font-size: 1.8rem;
             }
             
             .hero p {
@@ -455,7 +331,7 @@
             }
             
             .cta-buttons {
-                gap: 2rem;
+                gap: 1rem;
             }
             
             .features-grid,
@@ -464,39 +340,7 @@
             }
             
             .section-title {
-                font-size: 2rem;
-            }
-            
-            .header-container {
-                max-width: 90%;
-                padding: 0 5px;
-            }
-
-            .coffee-btn {
-                padding: 5px 15px;
-                font-size: 0.9rem;
-            }
-
-            .hero,
-            .features,
-            .screenshots,
-            .download {
-                clip-path: none;
-                margin-top: 0;
-                padding: 80px 0;
-            }
-
-            .hero {
-                padding: 100px 0 80px;
-            }
-
-            .browser-buttons {
-                gap: 1rem;
-            }
-
-            .browser-btn {
-                min-width: 140px;
-                padding: 1.5rem 1rem;
+                font-size: 1.8rem;
             }
         }
     </style>
@@ -512,15 +356,13 @@
                 </a>
             </div>
 
-            <div class="logo-section">
-                <div class="logo">
-                    <img src="LOGO-M.png" alt="MahmoodVhdtfr">
-                </div>
+            <div class="logo">
+                <img src="LOGO-M.png" alt="MahmoodVhdtfr">
             </div>
         </div>
     </header>
 
-    <!-- بخش‌ها با انحناهای طبیعی -->
+    <!-- بخش‌ها -->
     <section class="hero">
         <div class="container">
             <img src="Logo.png" alt="گونشفای" style="width:180px;height:auto;">
@@ -653,6 +495,7 @@
         <p>تورکجه‌م منیم، سس بایراغیم! ❤️ ایله یارادیلیب | <img src="LOGO-M.png" alt="MahmoodVhdtfr"> MahmoodVhdtfr © 2024</p>
     </footer>
 
+    <!-- لایت‌بکس -->
     <div id="lightbox" class="lightbox">
         <span class="lightbox-close">&times;</span>
         <div class="lightbox-nav">
@@ -663,7 +506,6 @@
     </div>
 
     <script>
-        // کدهای جاوااسکریپت
         const lightbox = document.getElementById('lightbox');
         const lightboxImg = document.getElementById('lightbox-img');
         const lightboxClose = document.querySelector('.lightbox-close');
@@ -713,18 +555,14 @@
 
         document.addEventListener('keydown', function(e) {
             if (lightbox.style.display === 'flex') {
-                switch(e.key) {
-                    case 'Escape':
-                        closeLightbox();
-                        break;
-                    case 'ArrowLeft':
-                        currentIndex = (currentIndex - 1 + images.length) % images.length;
-                        updateLightboxImage();
-                        break;
-                    case 'ArrowRight':
-                        currentIndex = (currentIndex + 1) % images.length;
-                        updateLightboxImage();
-                        break;
+                if (e.key === 'Escape') closeLightbox();
+                if (e.key === 'ArrowLeft') {
+                    currentIndex = (currentIndex - 1 + images.length) % images.length;
+                    updateLightboxImage();
+                }
+                if (e.key === 'ArrowRight') {
+                    currentIndex = (currentIndex + 1) % images.length;
+                    updateLightboxImage();
                 }
             }
         });
@@ -750,17 +588,6 @@
                     });
                 }
             });
-        });
-
-        window.addEventListener('scroll', function() {
-            const header = document.querySelector('header');
-            if (window.scrollY > 100) {
-                header.style.background = 'rgba(0, 0, 0, 0.9)';
-                header.style.backdropFilter = 'blur(15px)';
-            } else {
-                header.style.background = 'transparent';
-                header.style.backdropFilter = 'none';
-            }
         });
     </script>
 </body>
