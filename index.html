@@ -35,6 +35,7 @@
             line-height: 1.6;
             color: var(--text);
             background: var(--background);
+            overflow-x: hidden;
         }
         
         .container {
@@ -43,7 +44,7 @@
             padding: 0 20px;
         }
         
-        /* هدر - دقیقاً مشابه کد اصلی شما */
+        /* هدر */
         .main-header {
             padding-top: 8px;
             padding-bottom: 8px;
@@ -66,15 +67,6 @@
             display: flex;
             align-items: center;
             gap: 10px;
-        }
-
-        .logo-text {
-            font-family: system-ui;
-            font-size: 1em;
-            font-weight: bold;
-            background: #FFF;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
         }
 
         .logo {
@@ -128,25 +120,10 @@
             background-attachment: fixed;
             background-position: top;
             color: white;
-            padding: 90px 0 90px;
+            padding: 120px 0 180px;
             text-align: center;
             position: relative;
-        }
-
-        /* گرادیانت بین هیرو و ویژگی‌ها */
-        .hero::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 100px;
-            background: linear-gradient(to bottom, 
-                transparent 0%, 
-                rgba(230, 230, 250, 0.3) 30%,
-                rgba(230, 230, 250, 0.6) 60%,
-                lavender 100%);
-            z-index: 1;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
         }
         
         .hero h1 {
@@ -154,8 +131,6 @@
             margin-bottom: 1rem;
             margin-top: -1rem;
             text-shadow: 1px 1px 5px black;
-            position: relative;
-            z-index: 2;
         }
         
         .hero p {
@@ -164,8 +139,6 @@
             margin-bottom: 4rem;
             margin-top: 2rem;
             color: #fff;
-            position: relative;
-            z-index: 2;
         }
         
         .cta-buttons {
@@ -173,8 +146,6 @@
             gap: 10rem;
             justify-content: center;
             flex-wrap: wrap;
-            position: relative;
-            z-index: 2;
         }
         
         .btn {
@@ -201,24 +172,11 @@
         
         /* بخش ویژگی‌ها */
         .features {
-            padding: 120px 0 80px;
+            padding: 180px 0 150px;
             background: lavender;
             position: relative;
-            margin-top: -50px;
-        }
-
-        /* گرادیانت بین ویژگی‌ها و اسکرین‌شات‌ها */
-        .features::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 80px;
-            background: linear-gradient(to bottom, 
-                lavender 0%, 
-                rgba(255, 255, 255, 0.8) 50%,
-                white 100%);
+            margin-top: -100px;
+            clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
         }
         
         .section-title {
@@ -226,67 +184,51 @@
             font-size: 2.5rem;
             margin-bottom: 3rem;
             color: var(--text);
-            position: relative;
-            z-index: 2;
         }
         
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
-            position: relative;
-            z-index: 2;
         }
         
         .feature-card {
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
             padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
             text-align: center;
-            transition: transform 0.3s;
+            transition: all 0.3s ease;
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
         
         .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transform: translateY(-8px);
+            box-shadow: 0 16px 40px rgba(0,0,0,0.15);
         }
         
         .feature-icon {
-            width: 60px;
-            height: 60px;
-            margin: 0 auto 1rem;
-            background: var(--primary);
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
         }
         
         /* بخش اسکرین‌شات‌ها */
         .screenshots {
-            padding: 120px 0 80px;
+            padding: 150px 0 120px;
             background: white;
             position: relative;
-            margin-top: -30px;
-        }
-
-        /* گرادیانت بین اسکرین‌شات‌ها و دانلود */
-        .screenshots::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 80px;
-            background: linear-gradient(to bottom, 
-                white 0%, 
-                rgba(248, 250, 252, 0.8) 50%,
-                var(--background-alt) 100%);
+            margin-top: -80px;
+            clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%);
         }
         
         .screenshot-grid {
@@ -294,85 +236,101 @@
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
             margin-top: 3rem;
-            position: relative;
-            z-index: 2;
         }
         
         .screenshot-item {
-            border-radius: 12px;
+            border-radius: 16px;
             overflow: hidden;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.15);
             cursor: pointer;
-            transition: transform 0.3s;
+            transition: all 0.4s ease;
             background: white;
+            position: relative;
+        }
+        
+        .screenshot-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(37, 99, 235, 0.1), rgba(245, 158, 11, 0.1));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1;
         }
         
         .screenshot-item:hover {
-            transform: scale(1.05);
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+        }
+        
+        .screenshot-item:hover::before {
+            opacity: 1;
         }
         
         .screenshot-item img {
             width: 100%;
             height: auto;
             display: block;
+            transition: transform 0.4s ease;
+            position: relative;
+            z-index: 0;
+        }
+        
+        .screenshot-item:hover img {
+            transform: scale(1.05);
         }
         
         /* بخش دانلود */
         .download {
-            padding: 120px 0 80px;
+            padding: 120px 0 100px;
             background: var(--background-alt);
             text-align: center;
             position: relative;
-            margin-top: -30px;
-        }
-
-        /* گرادیانت بین دانلود و فوتر */
-        .download::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 60px;
-            background: linear-gradient(to bottom, 
-                var(--background-alt) 0%, 
-                rgba(95, 158, 160, 0.6) 60%,
-                cadetblue 100%);
+            margin-top: -60px;
+            clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
         }
         
         .browser-buttons {
             display: flex;
             justify-content: center;
-            gap: 1rem;
+            gap: 1.5rem;
             flex-wrap: wrap;
             margin-top: 2rem;
-            position: relative;
-            z-index: 2;
         }
         
         .browser-btn {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 10px;
-            padding: 1.5rem;
+            gap: 12px;
+            padding: 2rem 1.5rem;
             background: white;
-            border-radius: 12px;
+            border-radius: 16px;
             text-decoration: none;
             color: var(--text);
-            transition: all 0.3s;
-            min-width: 150px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            min-width: 160px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
         
         .browser-btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            transform: translateY(-8px);
+            box-shadow: 0 16px 40px rgba(0,0,0,0.15);
+            background: linear-gradient(135deg, white, #f8fafc);
         }
         
         .browser-icon {
-            width: 48px;
-            height: 48px;
+            width: 56px;
+            height: 56px;
+            transition: transform 0.3s ease;
+        }
+        
+        .browser-btn:hover .browser-icon {
+            transform: scale(1.1);
         }
         
         .browser-icon img {
@@ -384,10 +342,10 @@
         footer {
             background: cadetblue;
             color: white;
-            padding: 2em 0 1em;
+            padding: 3em 0 1.5em;
             text-align: center;
             position: relative;
-            margin-top: -20px;
+            margin-top: -50px;
         }
 
         .footer img {
@@ -405,39 +363,54 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(0, 0, 0, 0.95);
             z-index: 2000;
             justify-content: center;
             align-items: center;
+            backdrop-filter: blur(10px);
         }
         
         .lightbox-content {
-            max-width: 90%;
-            max-height: 90%;
-            border-radius: 10px;
-            box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+            max-width: 85%;
+            max-height: 85%;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+            animation: zoomIn 0.3s ease;
+        }
+        
+        @keyframes zoomIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
         
         .lightbox-close {
             position: absolute;
-            top: 20px;
-            right: 20px;
+            top: 30px;
+            right: 30px;
             color: white;
-            font-size: 2rem;
+            font-size: 2.5rem;
             cursor: pointer;
-            background: rgba(0, 0, 0, 0.5);
-            width: 50px;
-            height: 50px;
+            background: rgba(0, 0, 0, 0.6);
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
             transition: all 0.3s;
+            border: 2px solid rgba(255, 255, 255, 0.3);
         }
         
         .lightbox-close:hover {
             background: rgba(255, 255, 255, 0.2);
-            transform: scale(1.1);
+            transform: scale(1.1) rotate(90deg);
+            border-color: rgba(255, 255, 255, 0.6);
         }
         
         .lightbox-nav {
@@ -446,27 +419,29 @@
             width: 100%;
             display: flex;
             justify-content: space-between;
-            padding: 0 20px;
+            padding: 0 30px;
             transform: translateY(-50%);
         }
         
         .lightbox-prev, .lightbox-next {
             color: white;
-            font-size: 2rem;
+            font-size: 2.5rem;
             cursor: pointer;
-            background: rgba(0, 0, 0, 0.5);
-            width: 50px;
-            height: 50px;
+            background: rgba(0, 0, 0, 0.6);
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
             transition: all 0.3s;
+            border: 2px solid rgba(255, 255, 255, 0.3);
         }
         
         .lightbox-prev:hover, .lightbox-next:hover {
             background: rgba(255, 255, 255, 0.2);
             transform: scale(1.1);
+            border-color: rgba(255, 255, 255, 0.6);
         }
         
         /* رسپانسیو */
@@ -502,27 +477,34 @@
                 font-size: 0.9rem;
             }
 
+            .hero,
             .features,
             .screenshots,
             .download {
+                clip-path: none;
                 margin-top: 0;
                 padding: 80px 0;
             }
 
-            .hero::after,
-            .features::after,
-            .screenshots::after,
-            .download::after {
-                height: 50px;
+            .hero {
+                padding: 100px 0 80px;
+            }
+
+            .browser-buttons {
+                gap: 1rem;
+            }
+
+            .browser-btn {
+                min-width: 140px;
+                padding: 1.5rem 1rem;
             }
         }
     </style>
 </head>
 <body>
-    <!-- هدر - دقیقاً مشابه کد اصلی شما -->
+    <!-- هدر -->
     <header class="main-header">
         <div class="header-container">
-            <!-- دکمه Buy Me a Cup of Tea در سمت چپ -->
             <div class="header-actions">
                 <a href="https://daramet.com/MahmoodVhdtfr" target="_blank" rel="noopener noreferrer" class="coffee-btn">
                     <span class="coffee-text">Buy Me a Cup of Tea</span>
@@ -530,7 +512,6 @@
                 </a>
             </div>
 
-            <!-- لوگو در سمت راست -->
             <div class="logo-section">
                 <div class="logo">
                     <img src="LOGO-M.png" alt="MahmoodVhdtfr">
@@ -539,7 +520,7 @@
         </div>
     </header>
 
-    <!-- بقیه بخش‌ها با گرادیانت -->
+    <!-- بخش‌ها با انحناهای طبیعی -->
     <section class="hero">
         <div class="container">
             <img src="Logo.png" alt="گونشفای" style="width:180px;height:auto;">
@@ -682,7 +663,7 @@
     </div>
 
     <script>
-        // کدهای جاوااسکریپت بدون تغییر
+        // کدهای جاوااسکریپت
         const lightbox = document.getElementById('lightbox');
         const lightboxImg = document.getElementById('lightbox-img');
         const lightboxClose = document.querySelector('.lightbox-close');
@@ -774,8 +755,8 @@
         window.addEventListener('scroll', function() {
             const header = document.querySelector('header');
             if (window.scrollY > 100) {
-                header.style.background = 'rgba(0, 0, 0, 0.8)';
-                header.style.backdropFilter = 'blur(10px)';
+                header.style.background = 'rgba(0, 0, 0, 0.9)';
+                header.style.backdropFilter = 'blur(15px)';
             } else {
                 header.style.background = 'transparent';
                 header.style.backdropFilter = 'none';
