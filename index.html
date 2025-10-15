@@ -130,6 +130,23 @@
             color: white;
             padding: 90px 0 90px;
             text-align: center;
+            position: relative;
+        }
+
+        /* گرادیانت بین هیرو و ویژگی‌ها */
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to bottom, 
+                transparent 0%, 
+                rgba(230, 230, 250, 0.3) 30%,
+                rgba(230, 230, 250, 0.6) 60%,
+                lavender 100%);
+            z-index: 1;
         }
         
         .hero h1 {
@@ -137,6 +154,8 @@
             margin-bottom: 1rem;
             margin-top: -1rem;
             text-shadow: 1px 1px 5px black;
+            position: relative;
+            z-index: 2;
         }
         
         .hero p {
@@ -145,6 +164,8 @@
             margin-bottom: 4rem;
             margin-top: 2rem;
             color: #fff;
+            position: relative;
+            z-index: 2;
         }
         
         .cta-buttons {
@@ -152,6 +173,8 @@
             gap: 10rem;
             justify-content: center;
             flex-wrap: wrap;
+            position: relative;
+            z-index: 2;
         }
         
         .btn {
@@ -178,8 +201,24 @@
         
         /* بخش ویژگی‌ها */
         .features {
-            padding: 80px 0;
+            padding: 120px 0 80px;
             background: lavender;
+            position: relative;
+            margin-top: -50px;
+        }
+
+        /* گرادیانت بین ویژگی‌ها و اسکرین‌شات‌ها */
+        .features::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            background: linear-gradient(to bottom, 
+                lavender 0%, 
+                rgba(255, 255, 255, 0.8) 50%,
+                white 100%);
         }
         
         .section-title {
@@ -187,25 +226,32 @@
             font-size: 2.5rem;
             margin-bottom: 3rem;
             color: var(--text);
+            position: relative;
+            z-index: 2;
         }
         
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
+            position: relative;
+            z-index: 2;
         }
         
         .feature-card {
-            background: rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.9);
             padding: 2rem;
             border-radius: 12px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.05);
             text-align: center;
             transition: transform 0.3s;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
         
         .feature-card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
         }
         
         .feature-icon {
@@ -223,7 +269,24 @@
         
         /* بخش اسکرین‌شات‌ها */
         .screenshots {
-            padding: 80px 0;
+            padding: 120px 0 80px;
+            background: white;
+            position: relative;
+            margin-top: -30px;
+        }
+
+        /* گرادیانت بین اسکرین‌شات‌ها و دانلود */
+        .screenshots::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            background: linear-gradient(to bottom, 
+                white 0%, 
+                rgba(248, 250, 252, 0.8) 50%,
+                var(--background-alt) 100%);
         }
         
         .screenshot-grid {
@@ -231,6 +294,8 @@
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
             margin-top: 3rem;
+            position: relative;
+            z-index: 2;
         }
         
         .screenshot-item {
@@ -239,6 +304,7 @@
             box-shadow: 0 8px 25px rgba(0,0,0,0.1);
             cursor: pointer;
             transition: transform 0.3s;
+            background: white;
         }
         
         .screenshot-item:hover {
@@ -253,9 +319,25 @@
         
         /* بخش دانلود */
         .download {
-            padding: 80px 0;
+            padding: 120px 0 80px;
             background: var(--background-alt);
             text-align: center;
+            position: relative;
+            margin-top: -30px;
+        }
+
+        /* گرادیانت بین دانلود و فوتر */
+        .download::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background: linear-gradient(to bottom, 
+                var(--background-alt) 0%, 
+                rgba(95, 158, 160, 0.6) 60%,
+                cadetblue 100%);
         }
         
         .browser-buttons {
@@ -264,6 +346,8 @@
             gap: 1rem;
             flex-wrap: wrap;
             margin-top: 2rem;
+            position: relative;
+            z-index: 2;
         }
         
         .browser-btn {
@@ -300,8 +384,10 @@
         footer {
             background: cadetblue;
             color: white;
-            padding: 1em 0;
+            padding: 2em 0 1em;
             text-align: center;
+            position: relative;
+            margin-top: -20px;
         }
 
         .footer img {
@@ -415,6 +501,20 @@
                 padding: 5px 15px;
                 font-size: 0.9rem;
             }
+
+            .features,
+            .screenshots,
+            .download {
+                margin-top: 0;
+                padding: 80px 0;
+            }
+
+            .hero::after,
+            .features::after,
+            .screenshots::after,
+            .download::after {
+                height: 50px;
+            }
         }
     </style>
 </head>
@@ -439,7 +539,7 @@
         </div>
     </header>
 
-    <!-- بقیه بخش‌ها بدون تغییر -->
+    <!-- بقیه بخش‌ها با گرادیانت -->
     <section class="hero">
         <div class="container">
             <img src="Logo.png" alt="گونشفای" style="width:180px;height:auto;">
