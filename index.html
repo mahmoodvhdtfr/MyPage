@@ -43,29 +43,31 @@
             padding: 0 20px;
         }
         
-        /* هدر */
-        header {
+        /* هدر - دقیقاً مشابه کد اصلی شما */
+        .main-header {
+            padding-top: 8px;
+            padding-bottom: 8px;
+            z-index: 1000;
             position: absolute;
             width: 100%;
             top: 0;
-            z-index: 1000;
         }
-        
+
         .header-container {
             max-width: 95%;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 8px 10px;
+            padding: 0 10px;
         }
-        
+
         .logo-section {
             display: flex;
             align-items: center;
             gap: 10px;
         }
-        
+
         .logo-text {
             font-family: system-ui;
             font-size: 1em;
@@ -74,18 +76,18 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-        
+
         .logo img {
             width: 65px;
             height: auto;
         }
-        
+
         .header-actions {
             display: flex;
             align-items: center;
             gap: 15px;
         }
-        
+
         .coffee-btn {
             background: cadetblue;
             color: white;
@@ -101,7 +103,7 @@
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.2);
             backdrop-filter: blur(10px);
         }
-        
+
         .coffee-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.2);
@@ -396,16 +398,18 @@
     </style>
 </head>
 <body>
-    <!-- هدر -->
+    <!-- هدر - دقیقاً مشابه کد اصلی شما -->
     <header class="main-header">
         <div class="header-container">
+            <!-- دکمه Buy Me a Cup of Tea در سمت چپ -->
             <div class="header-actions">
                 <a href="https://daramet.com/MahmoodVhdtfr" target="_blank" rel="noopener noreferrer" class="coffee-btn">
                     <span class="coffee-text">Buy Me a Cup of Tea</span>
                     <span>🍵</span>
                 </a>
             </div>
-            
+
+            <!-- لوگو در سمت راست -->
             <div class="logo-section">
                 <div class="logo">
                     <span class="logo-text">MahmoodVhdtfr</span>
@@ -415,7 +419,7 @@
         </div>
     </header>
 
-    <!-- بخش هیرو -->
+    <!-- بقیه بخش‌ها بدون تغییر -->
     <section class="hero">
         <div class="container">
             <img src="Logo.png" alt="گونشفای" style="width:180px;height:auto;">
@@ -428,7 +432,6 @@
         </div>
     </section>
 
-    <!-- بخش ویژگی‌ها -->
     <section id="features" class="features">
         <div class="container">
             <h2 class="section-title">اؤزللیک لر</h2>
@@ -484,7 +487,6 @@
         </div>
     </section>
 
-    <!-- بخش اسکرین‌شات‌ها -->
     <section id="screenshots" class="screenshots">
         <div class="container">
             <h2 class="section-title">ائکران گؤرونتولری</h2>
@@ -520,7 +522,6 @@
         </div>
     </section>
 
-    <!-- بخش دانلود -->
     <section id="download" class="download">
         <div class="container">
             <h2 class="section-title">ائندیرین</h2>
@@ -547,12 +548,10 @@
         </div>
     </section>
 
-    <!-- فوتر -->
     <footer class="footer">
         <p>تورکجه‌م منیم، سس بایراغیم! ❤️ ایله یارادیلیب | MahmoodVhdtfr © 2024</p>
     </footer>
 
-    <!-- لایت‌بکس -->
     <div id="lightbox" class="lightbox">
         <span class="lightbox-close">&times;</span>
         <div class="lightbox-nav">
@@ -563,7 +562,7 @@
     </div>
 
     <script>
-        // لایت‌بکس
+        // کدهای جاوااسکریپت بدون تغییر
         const lightbox = document.getElementById('lightbox');
         const lightboxImg = document.getElementById('lightbox-img');
         const lightboxClose = document.querySelector('.lightbox-close');
@@ -574,7 +573,6 @@
         let currentIndex = 0;
         const images = [];
 
-        // جمع‌آوری تمام تصاویر
         triggers.forEach(trigger => {
             const img = trigger.querySelector('img');
             images.push({
@@ -583,7 +581,6 @@
             });
         });
 
-        // باز کردن لایت‌بکس
         triggers.forEach(trigger => {
             trigger.addEventListener('click', function() {
                 const index = parseInt(this.querySelector('img').getAttribute('data-index'));
@@ -594,7 +591,6 @@
             });
         });
 
-        // بستن لایت‌بکس
         lightboxClose.addEventListener('click', closeLightbox);
         lightbox.addEventListener('click', function(e) {
             if (e.target === lightbox) {
@@ -602,7 +598,6 @@
             }
         });
 
-        // ناوبری قبلی/بعدی
         lightboxPrev.addEventListener('click', function(e) {
             e.stopPropagation();
             currentIndex = (currentIndex - 1 + images.length) % images.length;
@@ -615,7 +610,6 @@
             updateLightboxImage();
         });
 
-        // کلیدهای کیبورد
         document.addEventListener('keydown', function(e) {
             if (lightbox.style.display === 'flex') {
                 switch(e.key) {
@@ -634,7 +628,6 @@
             }
         });
 
-        // توابع کمکی
         function updateLightboxImage() {
             lightboxImg.src = images[currentIndex].src;
             lightboxImg.alt = images[currentIndex].alt;
@@ -645,7 +638,6 @@
             document.body.style.overflow = 'auto';
         }
 
-        // اسکرول نرم
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -659,7 +651,6 @@
             });
         });
 
-        // افکت هدر هنگام اسکرول
         window.addEventListener('scroll', function() {
             const header = document.querySelector('header');
             if (window.scrollY > 100) {
