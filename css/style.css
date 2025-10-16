@@ -364,3 +364,76 @@ footer {
         width: 45%;
     }
 }
+
+/*استایل‌های مخصوص صفحه درباره ما   */
+
+/* صفحه درباره ما */
+.about-content {
+    padding: 120px 0 80px;
+    background: linear-gradient(180deg, #000000 0%, #2d3748 100%);
+    color: white;
+    min-height: 100vh;
+}
+
+.about-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 3rem;
+    border-radius: 15px;
+    margin-bottom: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: cadetblue;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    margin-top: 2rem;
+    transition: all 0.3s;
+}
+
+.back-btn:hover {
+    transform: translateY(-2px);
+    background: #5f9ea0;
+}
+
+.about-card h1 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: cadetblue;
+}
+
+.about-card h2 {
+    margin-bottom: 1rem;
+    color: #fff;
+}
+
+.about-card h3 {
+    margin: 1.5rem 0 1rem;
+    color: cadetblue;
+}
+
+.about-card p {
+    margin: 1rem 0;
+    line-height: 1.8;
+}
+
+.about-card ul {
+    margin: 1rem 0;
+    padding-right: 1.5rem;
+    line-height: 1.8;
+}
+
+.about-card a {
+    color: cadetblue;
+    text-decoration: none;
+}
+
+.about-card a:hover {
+    text-decoration: underline;
+}
