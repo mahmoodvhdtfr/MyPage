@@ -525,7 +525,7 @@
             <img src="LOGO-M.png" alt="MahmoodVhdtfr">
             <p style="margin: 0; font-weight: bold;">MahmoodVhdtfr</p>
         </a>
-        <p style="margin: 0;"> تورکجه‌م منیم، سس بایراغیم! ❤️ ایله یارادیلیب © 2024 |  👥 : <span class="visitor-number" id="footerVisitorCount">290</span> </p>
+        <p style="margin: 0;"> تورکجه‌م منیم، سس بایراغیم! ❤️ ایله یارادیلیب © 2024 |  👥 : <span class="visitor-number" id="footerVisitorCount">0</span> </p>
     </footer>
 
     <!-- لایت‌بکس -->
@@ -629,8 +629,8 @@
         async function updateVisitorCounter() {
             const counterElement = document.getElementById('footerVisitorCount');
             
-            // ابتدا عدد 290 رو نمایش بده
-            counterElement.textContent = '290';
+            // ابتدا عدد 0 رو نمایش بده
+            counterElement.textContent = '0';
             
             try {
                 // استفاده از CountAPI برای شمارش جهانی
@@ -638,8 +638,8 @@
                 const data = await response.json();
                 
                 if (data && data.value) {
-                    // انیمیشن از 290 به عدد واقعی
-                    animateCounter(counterElement, 290, data.value);
+                    // انیمیشن از 0 به عدد واقعی
+                    animateCounter(counterElement, 0, data.value);
                 }
             } catch (error) {
                 console.log('CountAPI not available, using simulated counter');
@@ -650,7 +650,7 @@
 
         // شبیه‌سازی شمارنده اگر API کار نکرد
         function simulateCounter(element) {
-            const baseCount = 290;
+            const baseCount = 0;
             const randomIncrement = Math.floor(Math.random() * 20) + 5;
             const finalCount = baseCount + randomIncrement;
             
