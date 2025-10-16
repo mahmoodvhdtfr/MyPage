@@ -1,6 +1,10 @@
 @font-face {
     font-family: 'MV';
     src: url('../fonts/MV.woff') format('woff');
+    /* یا اگر کار نکرد: */
+    /* src: url('./../fonts/MV.woff') format('woff'); */
+    /* یا: */
+    /* src: url('/fonts/MV.woff') format('woff'); */
     font-display: swap;
 }
 
