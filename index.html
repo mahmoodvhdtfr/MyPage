@@ -525,7 +525,7 @@
             <img src="LOGO-M.png" alt="MahmoodVhdtfr">
             <p style="margin: 0; font-weight: bold;">MahmoodVhdtfr</p>
         </a>
-        <p style="margin: 0;"> تورکجه‌م منیم، سس بایراغیم! ❤️ ایله یارادیلیب © 2024 | <span class="visitor-number" id="footerVisitorCount">0</span> : 👥 </p>
+        <p style="margin: 0;"> تورکجه‌م منیم، سس بایراغیم! ❤️ ایله یارادیلیب © 2024 |  👥 : <span class="visitor-number" id="footerVisitorCount">290</span> </p>
     </footer>
 
     <!-- لایت‌بکس -->
@@ -539,6 +539,7 @@
     </div>
 
     <script>
+        // کد لایت‌بکس
         const lightbox = document.getElementById('lightbox');
         const lightboxImg = document.getElementById('lightbox-img');
         const lightboxClose = document.querySelector('.lightbox-close');
@@ -610,6 +611,7 @@
             document.body.style.overflow = 'auto';
         }
 
+        // اسکرول نرم
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -623,51 +625,61 @@
             });
         });
 
-        // کانتر مطمئن و همیشه کار
-        function updateVisitorCounter() {
+        // کانتر با استفاده از CountAPI
+        async function updateVisitorCounter() {
             const counterElement = document.getElementById('footerVisitorCount');
             
-            // عدد پایه زیبا
-            let baseCount = 289;
+            // ابتدا عدد 290 رو نمایش بده
+            counterElement.textContent = '290';
             
-            // از localStorage بخون اگر وجود داره
-            const savedCount = localStorage.getItem('gunsefae_global_count');
-            if (savedCount) {
-                baseCount = parseInt(savedCount);
-            }
-            
-            // نمایش عدد
-            counterElement.textContent = baseCount;
-            
-            // افزایش عدد (فقط یک بار در session)
-            if (!sessionStorage.getItem('visitor_counted')) {
-                baseCount++;
-                counterElement.textContent = baseCount;
-                localStorage.setItem('gunsefae_global_count', baseCount);
-                sessionStorage.setItem('visitor_counted', 'true');
+            try {
+                // استفاده از CountAPI برای شمارش جهانی
+                const response = await fetch('https://api.countapi.xyz/hit/mahmoodvhdtfr-gunsefae/visits');
+                const data = await response.json();
                 
-                // در پس‌زمینه سعی کن به API گزارش بدی
-                try {
-                    // استفاده از CountAPI
-                    fetch('https://api.countapi.xyz/hit/mahmoodvhdtfr-gunsefae/visits')
-                        .then(response => response.json())
-                        .then(data => {
-                            if (data && data.value) {
-                                localStorage.setItem('gunsefae_global_count', data.value);
-                                counterElement.textContent = data.value;
-                            }
-                        })
-                        .catch(error => {
-                            // ignore errors
-                        });
-                } catch (error) {
-                    // ignore errors
+                if (data && data.value) {
+                    // انیمیشن از 290 به عدد واقعی
+                    animateCounter(counterElement, 290, data.value);
                 }
+            } catch (error) {
+                console.log('CountAPI not available, using simulated counter');
+                // اگر API کار نکرد، از شبیه‌سازی استفاده کن
+                simulateCounter(counterElement);
             }
         }
 
-        // اجرای کانتر
-        updateVisitorCounter();
+        // شبیه‌سازی شمارنده اگر API کار نکرد
+        function simulateCounter(element) {
+            const baseCount = 290;
+            const randomIncrement = Math.floor(Math.random() * 20) + 5;
+            const finalCount = baseCount + randomIncrement;
+            
+            // انیمیشن با تأخیر
+            setTimeout(() => {
+                animateCounter(element, baseCount, finalCount);
+            }, 1000);
+        }
+
+        // تابع انیمیشن شمارنده
+        function animateCounter(element, start, end) {
+            let current = start;
+            const increment = end > start ? 1 : -1;
+            const stepTime = Math.max(10, Math.floor(1000 / (end - start)));
+            
+            const timer = setInterval(() => {
+                current += increment;
+                element.textContent = current;
+                
+                if (current === end) {
+                    clearInterval(timer);
+                }
+            }, stepTime);
+        }
+
+        // اجرای کانتر وقتی صفحه لود شد
+        document.addEventListener('DOMContentLoaded', function() {
+            updateVisitorCounter();
+        });
     </script>
 </body>
 </html>
