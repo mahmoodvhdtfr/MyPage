@@ -1,74 +1,7 @@
 // کد لایت‌بکس
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = document.getElementById('lightbox-img');
-const lightboxClose = document.querySelector('.lightbox-close');
-const lightboxPrev = document.querySelector('.lightbox-prev');
-const lightboxNext = document.querySelector('.lightbox-next');
-const triggers = document.querySelectorAll('.lightbox-trigger');
-
-let currentIndex = 0;
-const images = [];
-
-triggers.forEach(trigger => {
-    const img = trigger.querySelector('img');
-    images.push({
-        src: img.src,
-        alt: img.alt
-    });
-});
-
-triggers.forEach(trigger => {
-    trigger.addEventListener('click', function() {
-        const index = parseInt(this.querySelector('img').getAttribute('data-index'));
-        currentIndex = index;
-        updateLightboxImage();
-        lightbox.style.display = 'flex';
-        document.body.style.overflow = 'hidden';
-    });
-});
-
-lightboxClose.addEventListener('click', closeLightbox);
-lightbox.addEventListener('click', function(e) {
-    if (e.target === lightbox) {
-        closeLightbox();
-    }
-});
-
-lightboxPrev.addEventListener('click', function(e) {
-    e.stopPropagation();
-    currentIndex = (currentIndex - 1 + images.length) % images.length;
-    updateLightboxImage();
-});
-
-lightboxNext.addEventListener('click', function(e) {
-    e.stopPropagation();
-    currentIndex = (currentIndex + 1) % images.length;
-    updateLightboxImage();
-});
-
-document.addEventListener('keydown', function(e) {
-    if (lightbox.style.display === 'flex') {
-        if (e.key === 'Escape') closeLightbox();
-        if (e.key === 'ArrowLeft') {
-            currentIndex = (currentIndex - 1 + images.length) % images.length;
-            updateLightboxImage();
-        }
-        if (e.key === 'ArrowRight') {
-            currentIndex = (currentIndex + 1) % images.length;
-            updateLightboxImage();
-        }
-    }
-});
-
-function updateLightboxImage() {
-    lightboxImg.src = images[currentIndex].src;
-    lightboxImg.alt = images[currentIndex].alt;
-}
-
-function closeLightbox() {
-    lightbox.style.display = 'none';
-    document.body.style.overflow = 'auto';
-}
+// ... کدهای لایت‌بکس
 
 // اسکرول نرم
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -85,7 +18,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 // کانتر با استفاده از CountAPI
-async function updateVisitorCounter() {
+async function updateVisitorCounter() {  // <- این تابع باید اینجا باشد
     const counterElement = document.getElementById('footerVisitorCount');
     
     // ابتدا عدد 0 رو نمایش بده
@@ -137,5 +70,5 @@ function animateCounter(element, start, end) {
 
 // اجرای کانتر وقتی صفحه لود شد
 document.addEventListener('DOMContentLoaded', function() {
-    updateVisitorCounter();
+    updateVisitorCounter();  // <- اینجا صدا زده می‌شود
 });
