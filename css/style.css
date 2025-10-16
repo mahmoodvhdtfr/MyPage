@@ -1,1 +1,38 @@
+@font-face {
+    font-family: 'MV';
+    src: url('../images/MV.woff') format('woff');
+    font-display: swap;
+}
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'MV', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #1f2937;
+    background: #ffffff;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* بقیه استایل‌ها دقیقاً مثل کد شما */
+/* فقط آدرس تصاویر را به '../images/' تغییر دهید */
+
+/* هدر */
+.main-header {
+    padding: 15px 0;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+/* ... بقیه استایل‌ها دقیقاً مثل کد شما */
