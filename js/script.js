@@ -68,6 +68,16 @@ function animateCounter(element, start, end) {
     }, stepTime);
 }
 
+// برای دیباگ - خط اول فایل
+console.log('script.js loaded successfully');
+
+// در انتهای فایل
+console.log('All functions defined:', {
+    updateVisitorCounter: typeof updateVisitorCounter,
+    simulateCounter: typeof simulateCounter,
+    animateCounter: typeof animateCounter
+});
+
 // اجرای کانتر وقتی صفحه لود شد
 document.addEventListener('DOMContentLoaded', function() {
     updateVisitorCounter();  // <- اینجا صدا زده می‌شود
