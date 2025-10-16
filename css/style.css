@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'MV';
-    src: url('../images/MV.woff') format('woff');
+    src: url('../fonts/MV.woff') format('woff');
     font-display: swap;
 }
 
@@ -23,9 +23,6 @@ body {
     padding: 0 20px;
 }
 
-/* بقیه استایل‌ها دقیقاً مثل کد شما */
-/* فقط آدرس تصاویر را به '../images/' تغییر دهید */
-
 /* هدر */
 .main-header {
     padding: 15px 0;
@@ -35,4 +32,335 @@ body {
     z-index: 1000;
 }
 
-/* ... بقیه استایل‌ها دقیقاً مثل کد شما */
+.header-container {
+    max-width: 95%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.logo img {
+    width: 65px;
+    height: auto;
+}
+
+.coffee-btn {
+    background: cadetblue;
+    color: white;
+    padding: 8px 20px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-family: sans-serif;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: all 0.3s ease;
+}
+
+.coffee-btn:hover {
+    transform: translateY(-2px);
+}
+
+/* بخش‌ها بدون margin */
+section {
+    margin: 0;
+    border: none;
+}
+
+/* هیرو */
+.hero {
+    background-image: url(../images/bg.jpg);
+    background-size: cover;
+    background-position: top;
+    color: white;
+    padding: 150px 0 100px;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+    text-shadow: 1px 1px 5px black;
+}
+
+.hero p {
+    font-size: 1.5em;
+    font-weight: 800;
+    margin-bottom: 3rem;
+    color: #fff;
+    text-shadow: 1px 1px 5px black;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background: white;
+    color: black;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s;
+    font-size: 18px;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+}
+
+/* ویژگی‌ها */
+.features {
+    padding: 100px 0;
+    background: linear-gradient(180deg, #000000 10%, #e5e7f8 100%);
+    text-align: center;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.2rem;
+    margin-bottom: 3rem;
+    color: #1f2937;
+}
+
+.features .section-title {
+    text-align: center;
+    font-size: 2.2rem;
+    margin-bottom: 3rem;
+    color: #fff;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.feature-card {
+    background: #fffffff0;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(50px);
+    text-align: center;
+    transition: transform 0.3s;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+}
+
+.feature-icon {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 1rem;
+    background: #2563eb;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+}
+
+/* اسکرین‌شات‌ها */
+.screenshots {
+    padding: 100px 0;
+    background: linear-gradient(180deg, lavender 0%, #e4eeef 100%);
+    text-align: center;
+}
+
+.screenshot-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.screenshot-item {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.screenshot-item:hover {
+    transform: scale(1.05);
+}
+
+.screenshot-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* دانلود با گرادیانت */
+.download {
+    padding: 100px 0;
+    background: linear-gradient(180deg, #e4eeef 0%, cadetblue 100%);
+    text-align: center;
+}
+
+.browser-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+}
+
+.browser-btn {
+    display: flex;
+    width: 20%;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 1.5rem;
+    background: white;
+    border-radius: 12px;
+    text-decoration: none;
+    color: #1f2937;
+    transition: all 0.3s;
+    min-width: 150px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.browser-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.browser-icon {
+    width: 48px;
+    height: 48px;
+}
+
+.browser-icon img {
+    width: 100%;
+    height: auto;
+}
+
+/* فوتر */
+footer {
+    background: cadetblue;
+    color: white;
+    padding: 2em 0;
+    text-align: center;
+    position: relative;
+}
+
+.footer img {
+    width: 50px;
+    height: auto;
+    vertical-align: middle;
+    margin: 0 5px;
+}
+
+.visitor-info {
+    margin-top: 10px;
+    font-size: 0.9em;
+    opacity: 0.8;
+}
+
+.visitor-number {
+    font-weight: bold;
+    color: #fff;
+}
+
+/* لایت‌بکس */
+.lightbox {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+}
+
+.lightbox-content {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 10px;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    background: rgba(0, 0, 0, 0.5);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.lightbox-nav {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    transform: translateY(-50%);
+}
+
+.lightbox-prev, .lightbox-next {
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    background: rgba(0, 0, 0, 0.5);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* رسپانسیو */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 160%;
+    }
+    
+    .hero p {
+        font-size: 95%;
+    }
+    
+    .cta-buttons {
+        gap: 1rem;
+    }
+    
+    .features-grid,
+    .screenshot-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .section-title {
+        font-size: 1.8rem;
+    }
+
+    .browser-btn {
+        width: 45%;
+    }
+}
