@@ -624,29 +624,50 @@
             });
         });
 
-        // استفاده از CountAPI (رایگان و ساده)
-        function updateVisitorCounter() {
-            // استفاده از نام دامنه شما به عنوان key
-            const namespace = 'gunsefae-extension';
-            const key = 'visits';
+        // کانتر پیشرفته با چندین سرویس پشتیبان
+        async function updateGlobalCounter() {
+            const counters = [
+                // اول Counter.dev رو امتحان کن
+                async () => {
+                    const response = await fetch('https://counter.dev/api/count?label=gunsefae-mahmoodvhdtfr');
+                    if (!response.ok) throw new Error('Counter.dev error');
+                    return await response.json();
+                },
+                // سپس CountAPI
+                async () => {
+                    const response = await fetch('https://api.countapi.xyz/hit/mahmoodvhdtfr-gunsefae/visits');
+                    if (!response.ok) throw new Error('CountAPI error');
+                    return await response.json();
+                },
+                // در نهایت یک سرویس دیگر
+                async () => {
+                    const response = await fetch('https://api.countapi.xyz/hit/gunsefae-browser-extension/official');
+                    if (!response.ok) throw new Error('Backup API error');
+                    return await response.json();
+                }
+            ];
+
+            for (let counter of counters) {
+                try {
+                    const data = await counter();
+                    if (data && (data.count || data.value)) {
+                        const count = data.count || data.value;
+                        document.getElementById('footerVisitorCount').textContent = count;
+                        console.log('تعداد بازدید جهانی:', count);
+                        return; // اگر موفق بود، خارج شو
+                    }
+                } catch (error) {
+                    console.log('سرویس کانتر در دسترس نیست:', error.message);
+                    continue; // به سرویس بعدی برو
+                }
+            }
             
-            fetch(`https://api.countapi.xyz/hit/${namespace}/${key}`)
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById('footerVisitorCount').textContent = data.value;
-                })
-                .catch(error => {
-                    console.log('کانتر در حالت آفلاین');
-                    // نمایش عدد تصادفی برای تست
-                    document.getElementById('footerVisitorCount').textContent = Math.floor(Math.random() * 100) + 50;
-                });
+            // اگر همه سرویس‌ها شکست خوردند
+            document.getElementById('footerVisitorCount').textContent = '❤️';
         }
 
-        // فقط یک بار در هر session بشماره
-        if (!sessionStorage.getItem('visitorCounted')) {
-            updateVisitorCounter();
-            sessionStorage.setItem('visitorCounted', 'true');
-        }
+        // همیشه شمارش کن (بدون شرط sessionStorage)
+        updateGlobalCounter();
     </script>
 </body>
 </html>
