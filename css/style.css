@@ -84,6 +84,15 @@ section {
     text-align: center;
 }
 
+.herosmws {
+    background-image: url(../images/bgsmws.jpg);
+    background-size: cover;
+    background-position: top;
+    color: white;
+    padding: 150px 0 100px;
+    text-align: center;
+}
+
 .hero h1 {
     font-size: 2.2rem;
     margin-bottom: 1rem;
@@ -91,6 +100,20 @@ section {
 }
 
 .hero p {
+    font-size: 1.5em;
+    font-weight: 800;
+    margin-bottom: 3rem;
+    color: #fff;
+    text-shadow: 1px 1px 5px black;
+}
+
+.herosmws h1 {
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+    text-shadow: 1px 1px 5px black;
+}
+
+.herosmws p {
     font-size: 1.5em;
     font-weight: 800;
     margin-bottom: 3rem;
@@ -126,7 +149,7 @@ section {
 /* ویژگی‌ها */
 .features {
     padding: 100px 0;
-    background: linear-gradient(180deg, #000000 10%, #e5e7f8 100%);
+    background: linear-gradient(180deg, #000000 30%, #e5e7f8 100%);
     text-align: center;
 }
 
@@ -140,7 +163,7 @@ section {
 .features .section-title {
     text-align: center;
     font-size: 2.2rem;
-    margin-bottom: 3rem;
+    margin-bottom: 5rem;
     color: #fff;
 }
 
