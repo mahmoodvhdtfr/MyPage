@@ -67,17 +67,41 @@ class ComponentLoader {
             'header': `
                 <header class="main-header">
                     <div class="header-container">
-                        <div class="header-actions">
-                            <a href="https://daramet.com/MahmoodVhdtfr" target="_blank" rel="noopener noreferrer" class="coffee-btn">
-                                <span class="coffee-text">Buy Me a Cup of Tea</span>
-                                <span>🍵</span>
-                            </a>
-                        </div>
                         <div class="logo">
-                            <a href="index.html">
+                            <a href="/">
                                 <img src="images/LOGO-M.png" alt="MahmoodVhdtfr" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjUiIGhlaWdodD0iNjUiIHZpZXdCb3g9IjAgMCA2NSA2NSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjY1IiBoZWlnaHQ9IjY1IiBmaWxsPSIjMzk4RDk1Ii8+Cjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJ3aGl0ZSIgZm9udC1zaXplPSIyNCI+TTwvdGV4dD4KPC9zdmc+'">
                             </a>
                         </div>
+
+                        <!-- منوی نویگیشن -->
+                        <nav class="nav-menu">
+                            <a href="index.html" class="nav-link">صفحه اصلی</a>
+                            <a href="easy-messaging.html" class="nav-link">Easy Messaging</a>
+                            <a href="gunsefae.html" class="nav-link">گونشفای</a>
+                            <a href="about.html" class="nav-link">درباره من</a>
+                        </nav>
+
+                        <div class="header-actions">
+                            <a href="https://daramet.com/MahmoodVhdtfr" target="_blank" rel="noopener noreferrer" class="coffee-btn">
+                                <span>🍵</span>
+                                <span class="coffee-text">منی بیر چایا قوناق ائله!</span>
+                            </a>
+                        </div>
+
+                        <!-- دکمه منوی موبایل -->
+                        <div class="mobile-menu-btn">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+
+                    <!-- منوی موبایل -->
+                    <div class="mobile-menu">
+                        <a href="index.html" class="mobile-nav-link">صفحه اصلی</a>
+                        <a href="easy-messaging.html" class="mobile-nav-link">Easy Messaging</a>
+                        <a href="gunsefae.html" class="mobile-nav-link">گونشفای</a>
+                        <a href="about.html" class="mobile-nav-link">درباره من</a>
                     </div>
                 </header>
             `,
@@ -209,6 +233,7 @@ class ComponentLoader {
         this.initializeSmoothScroll();
         this.initializeVisitorCounter();
         this.handleDisabledLinks();
+        this.initializeMobileMenu();
         this.initializeNavigation();
         
         console.log('All features initialized');
@@ -217,6 +242,35 @@ class ComponentLoader {
     // تابع کمکی برای تاخیر
     delay(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    // اینیشالایز کردن منوی موبایل
+    initializeMobileMenu() {
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        
+        if (mobileMenuBtn && mobileMenu) {
+            mobileMenuBtn.addEventListener('click', function() {
+                this.classList.toggle('active');
+                mobileMenu.classList.toggle('active');
+            });
+            
+            // بستن منو با کلیک روی لینک‌ها
+            mobileMenu.querySelectorAll('.mobile-nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenuBtn.classList.remove('active');
+                    mobileMenu.classList.remove('active');
+                });
+            });
+            
+            // بستن منو با کلیک خارج از منو
+            document.addEventListener('click', (e) => {
+                if (!mobileMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+                    mobileMenuBtn.classList.remove('active');
+                    mobileMenu.classList.remove('active');
+                }
+            });
+        }
     }
 
     // اینیشالایز کردن لایت‌بکس
