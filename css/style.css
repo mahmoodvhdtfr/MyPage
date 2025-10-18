@@ -464,3 +464,26 @@ footer {
 .about-card a:hover {
     text-decoration: underline;
 }
+/* استایل برای لینک‌های غیرفعال */
+.browser-btn:not([href]), 
+.browser-btn[href="#"] {
+    opacity: 0.6;
+    cursor: not-allowed;
+    filter: grayscale(100%);
+}
+
+.browser-btn:not([href]):hover, 
+.browser-btn[href="#"]:hover {
+    transform: none;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+/* استایل برای حالت لودینگ */
+.components-loading {
+    opacity: 0.7;
+}
+
+.components-loaded {
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
