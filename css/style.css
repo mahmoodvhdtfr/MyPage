@@ -591,3 +591,22 @@ footer {
         justify-content: space-between;
     }
 }
+
+.instal-chrome {
+    padding: 150px 0;
+    background: linear-gradient(180deg, #000000 0%, cadetblue 100%);
+    text-align: center;
+}
+
+.instal-chrome .section-title {
+    text-align: center;
+    font-size: 2.2rem;
+    margin-bottom: 5rem;
+    color: #fff;
+}
+
+.instal-chrome .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+}
