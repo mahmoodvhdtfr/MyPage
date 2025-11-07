@@ -372,9 +372,9 @@ class ComponentLoader {
     // دریافت از Cloudflare GraphQL API
     async getFromCFAPI() {
         // شما نیاز به API Token از Cloudflare دارید
-        const CLOUDFLARE_API_TOKEN = 'your_api_token_here';
-        const CLOUDFLARE_ACCOUNT_ID = 'your_account_id_here';
-        const CLOUDFLARE_ZONE_ID = 'your_zone_id_here';
+        const CLOUDFLARE_API_KEY = 'b@1b5pde-212c1adeb4d6B40df0f42e9b1b1e3e';
+        const CLOUDFLARE_EMAIL = 'm.vahdatfar@gmail.com';
+        const CLOUDFLARE_ZONE_ID = 'ce12efb7ff3065f5e329b6fa127706ad';
         
         const query = `
             query {
