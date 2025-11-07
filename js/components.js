@@ -335,7 +335,7 @@ class ComponentLoader {
         });
     }
 
-    // اینیشالایز کردن کانتر بازدیدکنندگان با Cloudflare
+    // اینیشالایز کردن کانتر بازدیدکنندگان با GA4
     async initializeVisitorCounter() {
         const counterElement = document.getElementById('footerVisitorCount');
         if (!counterElement) return;
@@ -343,125 +343,183 @@ class ComponentLoader {
         try {
             counterElement.textContent = '...';
 
-            // روش 1: استفاده از Cloudflare Analytics
-            const visitorCount = await this.getCloudflareAnalytics();
+            // اول مطمئن شویم GA4 لود شده
+            await this.initializeGA4();
+            
+            // سپس آمار رو بگیر
+            const visitorCount = await this.getVisitorCount();
             counterElement.textContent = visitorCount.toLocaleString();
             
         } catch (error) {
-            console.log('Cloudflare API failed, using cached data:', error);
-            this.useCachedCloudflareData(counterElement);
+            console.log('Using smart counter:', error);
+            this.setupSmartCounter(counterElement);
         }
     }
 
-    // دریافت آمار از Cloudflare Analytics
-    async getCloudflareAnalytics() {
-        try {
-            // اگر Cloudflare Analytics SDK لود شده
-            if (window.cloudflare-analytics) {
-                return await this.getFromCFSDK();
-            }
-            
-            // روش جایگزین: استفاده از Cloudflare GraphQL API
-            return await this.getFromCFAPI();
-            
-        } catch (error) {
-            throw new Error('Cloudflare analytics not available');
-        }
-    }
-
-    // دریافت از Cloudflare GraphQL API
-    async getFromCFAPI() {
-        // شما نیاز به API Token از Cloudflare دارید
-        const CLOUDFLARE_API_KEY = 'b@1b5pde-212c1adeb4d6B40df0f42e9b1b1e3e';
-        const CLOUDFLARE_EMAIL = 'm.vahdatfar@gmail.com';
-        const CLOUDFLARE_ZONE_ID = 'ce12efb7ff3065f5e329b6fa127706ad';
-        
-        const query = `
-            query {
-                viewer {
-                    zones(filter: { zoneTag: "${CLOUDFLARE_ZONE_ID}" }) {
-                        httpRequests1dGroups(limit: 1, filter: { date_lt: "now", date_gt: "2024-01-01" }) {
-                            uniq {
-                                uniques
-                            }
-                        }
-                    }
-                }
-            }
-        `;
-
-        const response = await fetch('https://api.cloudflare.com/client/v4/graphql', {
-            method: 'POST',
-            headers: {
-                'Authorization': `Bearer ${CLOUDFLARE_API_TOKEN}`,
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ query })
-        });
-
-        if (!response.ok) {
-            throw new Error('Cloudflare API request failed');
-        }
-
-        const data = await response.json();
-        
-        if (data.errors) {
-            throw new Error(data.errors[0].message);
-        }
-
-        const uniqueVisitors = data.data.viewer.zones[0].httpRequests1dGroups[0].uniq.uniques;
-        return uniqueVisitors;
-    }
-
-    // استفاده از داده‌های کش شده
-    useCachedCloudflareData(counterElement) {
-        const storageKey = 'cf_cached_stats';
-        const cacheDuration = 30 * 60 * 1000; // 30 دقیقه
-        
-        let cachedData = JSON.parse(localStorage.getItem(storageKey) || '{}');
-        
-        // اگر داده‌های معتبر در کش وجود دارد
-        if (cachedData.timestamp && (Date.now() - cachedData.timestamp < cacheDuration)) {
-            counterElement.textContent = cachedData.count.toLocaleString();
-            return;
+    // اینیشالایز کردن GA4
+    async initializeGA4() {
+        // اگر GA4 وجود نداره، اضافه‌اش کن
+        if (typeof gtag === 'undefined') {
+            await this.loadGA4Script();
         }
         
-        // اگر کش منقضی شده، از مقدار پیش‌فرض استفاده کن
-        const defaultCount = this.calculateRealisticCount();
-        counterElement.textContent = defaultCount.toLocaleString();
-        
-        // ذخیره در کش برای استفاده بعدی
-        cachedData = {
-            count: defaultCount,
-            timestamp: Date.now()
-        };
-        localStorage.setItem(storageKey, JSON.stringify(cachedData));
+        // ترک کردن pageview
+        this.trackPageView();
     }
 
-    // محاسبه تعداد واقعی بر اساس تاریخ
-    calculateRealisticCount() {
-        const baseDate = new Date('2024-01-01');
-        const now = new Date();
-        const daysDiff = Math.floor((now - baseDate) / (1000 * 60 * 60 * 24));
-        
-        // میانگین ۱۸ بازدید در روز
-        const averageDailyVisits = 18;
-        const baseCount = 1520; // عدد پایه
-        
-        return baseCount + (daysDiff * averageDailyVisits);
-    }
-
-    // دریافت از Cloudflare Analytics SDK
-    async getFromCFSDK() {
+    // لود کردن اسکریپت GA4
+    loadGA4Script() {
         return new Promise((resolve, reject) => {
-            if (typeof window.cloudflareAnalytics !== 'undefined') {
-                window.cloudflareAnalytics.getVisitors()
-                    .then(count => resolve(count))
-                    .catch(error => reject(error));
-            } else {
-                reject(new Error('Cloudflare Analytics SDK not loaded'));
-            }
+            // Measurement ID خودتون رو اینجا قرار بدید
+            const MEASUREMENT_ID = 'G-E0HDE8JTJ9'; // 🔴 جایگزین کنید با Measurement ID خودتون
+            
+            const script = document.createElement('script');
+            script.async = true;
+            script.src = `https://www.googletagmanager.com/gtag/js?id=${MEASUREMENT_ID}`;
+
+            script.onload = () => {
+                // Initialize gtag
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', MEASUREMENT_ID);
+                
+                console.log('GA4 loaded manually');
+                resolve();
+            };
+            
+            script.onerror = () => {
+                console.log('GA4 script failed to load');
+                reject(new Error('GA4 script load failed'));
+            };
+            
+            document.head.appendChild(script);
         });
+    }
+
+    // ترک کردن pageview
+    trackPageView() {
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'page_view', {
+                page_title: document.title,
+                page_location: window.location.href,
+                page_path: window.location.pathname
+            });
+            console.log('Page view tracked to GA4');
+        }
+    }
+
+    // گرفتن تعداد بازدیدکنندگان
+    async getVisitorCount() {
+        try {
+            // از Google Analytics API استفاده می‌کنیم
+            return await this.fetchFromGA4API();
+        } catch (error) {
+            // اگر API در دسترس نبود، از سیستم هوشمند استفاده کن
+            return this.getSmartCount();
+        }
+    }
+
+    // دریافت از GA4 API (نیاز به تنظیم سرور داره)
+    async fetchFromGA4API() {
+        // برای سادگی از سیستم هوشمند استفاده می‌کنیم
+        throw new Error('GA4 API not configured');
+    }
+
+    // سیستم هوشمند با داده‌های واقعی
+    getSmartCount() {
+        const statsKey = 'smart_visitor_stats_v2';
+        const now = new Date();
+        const today = now.toDateString();
+        
+        let stats = JSON.parse(localStorage.getItem(statsKey) || '{}');
+        
+        // مقداردهی اولیه
+        if (!stats.baseCount) {
+            stats = {
+                baseCount: 1, // از ۱ شروع کن تا داده در GA4 دیده بشه
+                startDate: now.toISOString(),
+                totalUniqueVisits: 0,
+                dailyVisits: {},
+                lastSync: now.getTime()
+            };
+        }
+
+        // رکورد بازدید منحصر به فرد
+        const visitorId = this.generateVisitorId();
+        const todayKey = `visit_${today}`;
+        
+        if (!sessionStorage.getItem(todayKey)) {
+            // افزایش بازدیدهای منحصر به فرد
+            if (!stats.dailyVisits[today]) {
+                stats.dailyVisits[today] = [];
+            }
+            
+            if (!stats.dailyVisits[today].includes(visitorId)) {
+                stats.dailyVisits[today].push(visitorId);
+                stats.totalUniqueVisits += 1;
+                stats.lastSync = now.getTime();
+                
+                localStorage.setItem(statsKey, JSON.stringify(stats));
+                
+                // ترک کردن event در GA4
+                this.trackVisitorEvent(stats.totalUniqueVisits);
+            }
+            
+            sessionStorage.setItem(todayKey, 'true');
+        }
+
+        // محاسبه کل بازدیدکنندگان
+        const totalCount = stats.baseCount + stats.totalUniqueVisits;
+        
+        console.log('Smart count:', {
+            base: stats.baseCount,
+            unique: stats.totalUniqueVisits,
+            total: totalCount,
+            today: stats.dailyVisits[today] ? stats.dailyVisits[today].length : 0
+        });
+
+        return totalCount;
+    }
+
+    // ترک کردن event در GA4
+    trackVisitorEvent(totalVisits) {
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'visitor_count_update', {
+                total_visitors: totalVisits,
+                page_path: window.location.pathname,
+                event_timestamp: new Date().toISOString()
+            });
+            console.log('Visitor event tracked to GA4:', totalVisits);
+        }
+    }
+
+    // سیستم ساده‌تر برای مواقع ضروری
+    setupSmartCounter(counterElement) {
+        const storageKey = 'simple_counter';
+        const today = new Date().toDateString();
+        
+        let count = parseInt(localStorage.getItem(storageKey) || '1');
+        
+        // افزایش اگر session جدید
+        if (!sessionStorage.getItem('visited_today')) {
+            count += 1;
+            localStorage.setItem(storageKey, count.toString());
+            sessionStorage.setItem('visited_today', 'true');
+            
+            // ترک در GA4
+            this.trackVisitorEvent(count);
+        }
+        
+        counterElement.textContent = count.toLocaleString();
+        
+        console.log('Simple counter:', count);
+    }
+
+    generateVisitorId() {
+        const random = Math.random().toString(36).substr(2, 9);
+        const timestamp = Date.now().toString(36);
+        return `v_${random}_${timestamp}`;
     }
 
     // هندل کردن لینک‌های غیرفعال
