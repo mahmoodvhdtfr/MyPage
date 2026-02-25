@@ -234,49 +234,52 @@
             }
         }
 
-        // ارسال لینک از طریق سرور واسط
-        document.getElementById('linkForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            const link = document.getElementById('linkInput').value;
-            const messageDiv = document.getElementById('message');
-            const submitBtn = document.getElementById('submitBtn');
-            
-            if (!isValidUrl(link)) {
-                showMessage('❌ لطفاً یک لینک معتبر وارد کنید', 'error');
-                return;
-            }
-            
-            showMessage('⏳ در حال ذخیره لینک...', 'info');
-            submitBtn.disabled = true;
-            
-            try {
-                const response = await fetch(PROXY_URL, {
-                    method: 'POST',
-                    mode: 'no-cors', // مهم: برای Google Apps Script
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ link: link })
-                });
-                
-                // با no-cors نمی‌توانیم پاسخ را بخوانیم
-                showMessage('✅ لینک ارسال شد! (در حال تایید...)', 'info');
-                
-                // چند ثانیه صبر می‌کنیم
-                setTimeout(async () => {
-                    await loadCurrentLink();
-                    showMessage('✅ لینک با موفقیت ذخیره شد!', 'success');
-                }, 3000);
-                
-                document.getElementById('linkInput').value = '';
-                
-            } catch (error) {
-                showMessage('❌ خطا در ارتباط با سرور', 'error');
-            } finally {
-                submitBtn.disabled = false;
-            }
+// ارسال لینک از طریق سرور واسط
+document.getElementById('linkForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const link = document.getElementById('linkInput').value;
+    const messageDiv = document.getElementById('message');
+    const submitBtn = document.getElementById('submitBtn');
+    
+    if (!isValidUrl(link)) {
+        showMessage('❌ لطفاً یک لینک معتبر وارد کنید', 'error');
+        return;
+    }
+    
+    showMessage('⏳ در حال ذخیره لینک...', 'info');
+    submitBtn.disabled = true;
+    
+    try {
+        const response = await fetch(PROXY_URL, {
+            method: 'POST',
+            mode: 'cors', // تغییر از no-cors به cors
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ link: link })
         });
+        
+        if (response.ok) {
+            const result = await response.json();
+            if (result.success) {
+                showMessage('✅ لینک با موفقیت در گیت‌هاب ذخیره شد!', 'success');
+                document.getElementById('linkInput').value = '';
+                // بارگذاری مجدد لینک فعلی بعد از ۲ ثانیه
+                setTimeout(() => loadCurrentLink(), 2000);
+            } else {
+                showMessage('❌ خطا از سمت سرور: ' + (result.message || 'خطای ناشناخته'), 'error');
+            }
+        } else {
+            showMessage('❌ خطا در ارتباط با سرور (کد: ' + response.status + ')', 'error');
+        }
+    } catch (error) {
+        console.error('خطای کامل:', error);
+        showMessage('❌ خطا در ارتباط با سرور: ' + error.message, 'error');
+    } finally {
+        submitBtn.disabled = false;
+    }
+});
 
         function isValidUrl(string) {
             try {
