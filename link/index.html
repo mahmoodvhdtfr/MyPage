@@ -208,128 +208,19 @@
         </div>
     </div>
 
-    <script>
-        // ✅ توکن جدید - مستقیم توی کد برای تست
-        const GITHUB_TOKEN = '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';
         
-        // اطلاعات مخزن
-        const REPO_OWNER = 'mahmoodvhdtfr';
-        const REPO_NAME = 'mahmoodvhdtfr.github.io';
-        const FILE_PATH = 'link/link.txt';
-        
-        // تابع بارگذاری لینک فعلی
-        function loadCurrentLink() {
-            fetch(`/link/link.txt?t=${new Date().getTime()}`)
-                .then(response => {
-                    if (response.ok) {
-                        return response.text();
-                    }
-                    throw new Error('خطا');
-                })
-                .then(link => {
-                    document.getElementById('currentLink').textContent = link.trim() || 'هنوز لینکی ثبت نشده';
-                })
-                .catch(() => {
-                    document.getElementById('currentLink').textContent = 'خطا در دریافت لینک';
-                });
-        }
+<script>
+const GITHUB_TOKEN = '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';
+const REPO_OWNER = 'mahmoodvhdtfr';
+const REPO_NAME = 'mahmoodvhdtfr.github.io';
+const FILE_PATH = 'link/link.txt';
 
-        // تابع ذخیره لینک در گیت‌هاب
-        async function saveLinkToGitHub(link) {
-            try {
-                // ۱. دریافت SHA فایل فعلی
-                const getUrl = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${FILE_PATH}`;
-                const getResponse = await fetch(getUrl, {
-                    headers: {
-                        'Authorization': `token ${GITHUB_TOKEN}`,
-                        'Accept': 'application/vnd.github.v3+json'
-                    }
-                });
-                
-                if (!getResponse.ok) {
-                    console.error('خطا در دریافت SHA:', getResponse.status);
-                    return false;
-                }
-                
-                const getData = await getResponse.json();
-                const sha = getData.sha;
-                
-                // ۲. آپدیت فایل با لینک جدید
-                const putUrl = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${FILE_PATH}`;
-                const content = btoa(link); // تبدیل به base64
-                
-                const putBody = {
-                    message: 'آپدیت خودکار لینک',
-                    content: content,
-                    sha: sha,
-                    branch: 'main'
-                };
-                
-                const putResponse = await fetch(putUrl, {
-                    method: 'PUT',
-                    headers: {
-                        'Authorization': `token ${GITHUB_TOKEN}`,
-                        'Accept': 'application/vnd.github.v3+json',
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(putBody)
-                });
-                
-                if (putResponse.ok) {
-                    return true;
-                } else {
-                    console.error('خطا در آپدیت:', await putResponse.json());
-                    return false;
-                }
-            } catch (error) {
-                console.error('خطا در ذخیره:', error);
-                return false;
-            }
-        }
-
-        // رویداد ارسال فرم
-        document.getElementById('linkForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            const link = document.getElementById('linkInput').value;
-            const submitBtn = document.getElementById('submitBtn');
-            
-            // اعتبارسنجی لینک
-            if (!link.match(/^https?:\/\/.+/)) {
-                showMessage('❌ لطفاً یک لینک معتبر وارد کنید', 'error');
-                return;
-            }
-            
-            showMessage('⏳ در حال ذخیره در گیت‌هاب...', 'info');
-            submitBtn.disabled = true;
-            
-            // ذخیره لینک
-            const success = await saveLinkToGitHub(link);
-            
-            if (success) {
-                showMessage('✅ لینک با موفقیت در گیت‌هاب ذخیره شد!', 'success');
-                document.getElementById('linkInput').value = '';
-                setTimeout(loadCurrentLink, 1000);
-            } else {
-                showMessage('❌ خطا در ذخیره لینک', 'error');
-            }
-            
-            submitBtn.disabled = false;
-        });
-
-        // تابع نمایش پیام
-        function showMessage(text, type) {
-            const msg = document.getElementById('message');
-            msg.textContent = text;
-            msg.className = 'message ' + type;
-            setTimeout(() => msg.className = 'message', 3000);
-        }
-
-        // بارگذاری اولیه
-        window.addEventListener('load', loadCurrentLink);
-        
-        // به‌روزرسانی خودکار هر ۳۰ ثانیه
-        setInterval(loadCurrentLink, 30000);
-    </script>
+fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${FILE_PATH}`, {
+    headers: {'Authorization': `token ${GITHUB_TOKEN}`}
+})
+.then(r => r.json())
+.then(data => console.log('SHA:', data.sha))
+.catch(e => console.error('خطا:', e));
+</script>
 </body>
 </html>
