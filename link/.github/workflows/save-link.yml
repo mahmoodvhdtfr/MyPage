@@ -1,0 +1,33 @@
+name: Save Link
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  save-link:
+    if: contains(github.event.issue.title, '[LINK]')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      
+      - name: Extract link from issue body
+        id: extract
+        run: |
+          LINK=$(echo "${{ github.event.issue.body }}" | grep -oE 'https?://[^[:space:]]+')
+          echo "link=$LINK" >> $GITHUB_OUTPUT
+          echo "لینک استخراج شده: $LINK"
+      
+      - name: Save link to file
+        run: |
+          echo "${{ steps.extract.outputs.link }}" > link.txt
+          echo "لینک در فایل ذخیره شد: $(cat link.txt)"
+      
+      - name: Commit and push changes
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add link.txt
+          git commit -m "آپدیت لینک [skip ci]"
+          git push
