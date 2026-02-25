@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ارسال لینک</title>
     <style>
-        /* استایل‌ها مثل قبل */
         body {
             font-family: Tahoma, Arial, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -14,6 +13,7 @@
             justify-content: center;
             align-items: center;
             padding: 20px;
+            margin: 0;
         }
         
         .container {
@@ -57,12 +57,6 @@
             font-size: 16px;
             box-sizing: border-box;
             direction: ltr;
-        }
-        
-        input[type="url"]:focus {
-            outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
         }
         
         button {
@@ -124,13 +118,6 @@
             background: #f8f9fa;
             border-radius: 15px;
             word-break: break-all;
-            border: 1px solid #dee2e6;
-        }
-        
-        .current-link strong {
-            color: #333;
-            display: block;
-            margin-bottom: 10px;
         }
         
         .link-box {
@@ -141,6 +128,7 @@
             color: #667eea;
             font-family: monospace;
             font-size: 14px;
+            margin-top: 10px;
             direction: ltr;
             text-align: left;
         }
@@ -183,8 +171,8 @@
 </head>
 <body>
     <div class="container">
-        <h2>🔗 ارسال لینک به گیت‌هاب</h2>
-        <div class="subtitle">بدون نیاز به توکن - همه می‌توانند استفاده کنند</div>
+        <h2>🔗 ارسال لینک</h2>
+        <div class="subtitle">با هر بار ارسال، فایل link.txt آپدیت می‌شود</div>
         
         <form id="linkForm">
             <div class="form-group">
@@ -206,18 +194,17 @@
         
         <div class="status">
             <span class="dot"></span>
-            <span>سیستم امن - لینک‌ها از طریق سرور واسط ذخیره می‌شوند</span>
+            <span>سیستم فعال</span>
         </div>
         
         <div class="footer">
-            ⚡ توکن شما در سمت سرور محفوظ است
+            ⚡ لینک‌ها در گیت‌هاب ذخیره می‌شوند
         </div>
     </div>
 
     <script>
-        // آدرس Web App گوگل (این را با آدرس خودت جایگزین کن)
-        const PROXY_URL = 'https://script.google.com/macros/s/AKfycbwf9fq_3ZTyytz-oBaLNRJeb9me_dpc_YC-dWi3L0MiReroVMo9k1yFazs6rSiPtSb0Cw/exec';
-        
+        // اینجا آدرسی که از Google Apps Script گرفتی رو بذار
+ https://script.google.com/macros/s/AKfycbzu01s-NXo-Ew6eBtOZPWE_v4hqI2mqD2hcAeCrbv-XjEYV9oza6XjWvgBOIfqYYElDHA/exec
         // بارگذاری لینک فعلی
         async function loadCurrentLink() {
             try {
@@ -234,52 +221,51 @@
             }
         }
 
-// ارسال لینک از طریق سرور واسط
-document.getElementById('linkForm').addEventListener('submit', async function(e) {
-    e.preventDefault();
-    
-    const link = document.getElementById('linkInput').value;
-    const messageDiv = document.getElementById('message');
-    const submitBtn = document.getElementById('submitBtn');
-    
-    if (!isValidUrl(link)) {
-        showMessage('❌ لطفاً یک لینک معتبر وارد کنید', 'error');
-        return;
-    }
-    
-    showMessage('⏳ در حال ذخیره لینک...', 'info');
-    submitBtn.disabled = true;
-    
-    try {
-        const response = await fetch(PROXY_URL, {
-            method: 'POST',
-            mode: 'cors', // تغییر از no-cors به cors
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ link: link })
-        });
-        
-        if (response.ok) {
-            const result = await response.json();
-            if (result.success) {
-                showMessage('✅ لینک با موفقیت در گیت‌هاب ذخیره شد!', 'success');
-                document.getElementById('linkInput').value = '';
-                // بارگذاری مجدد لینک فعلی بعد از ۲ ثانیه
-                setTimeout(() => loadCurrentLink(), 2000);
-            } else {
-                showMessage('❌ خطا از سمت سرور: ' + (result.message || 'خطای ناشناخته'), 'error');
+        // ارسال لینک
+        document.getElementById('linkForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const link = document.getElementById('linkInput').value;
+            const messageDiv = document.getElementById('message');
+            const submitBtn = document.getElementById('submitBtn');
+            
+            if (!isValidUrl(link)) {
+                showMessage('❌ لطفاً یک لینک معتبر وارد کنید', 'error');
+                return;
             }
-        } else {
-            showMessage('❌ خطا در ارتباط با سرور (کد: ' + response.status + ')', 'error');
-        }
-    } catch (error) {
-        console.error('خطای کامل:', error);
-        showMessage('❌ خطا در ارتباط با سرور: ' + error.message, 'error');
-    } finally {
-        submitBtn.disabled = false;
-    }
-});
+            
+            showMessage('⏳ در حال ذخیره لینک...', 'info');
+            submitBtn.disabled = true;
+            
+            try {
+                const response = await fetch(PROXY_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ link: link })
+                });
+                
+                if (response.ok) {
+                    const result = await response.json();
+                    if (result.success) {
+                        showMessage('✅ لینک با موفقیت ذخیره شد!', 'success');
+                        document.getElementById('linkInput').value = '';
+                        setTimeout(() => {
+                            loadCurrentLink();
+                        }, 2000);
+                    } else {
+                        showMessage('❌ خطا: ' + result.message, 'error');
+                    }
+                } else {
+                    showMessage('❌ خطا در ارتباط با سرور', 'error');
+                }
+            } catch (error) {
+                showMessage('❌ خطا: ' + error.message, 'error');
+            } finally {
+                submitBtn.disabled = false;
+            }
+        });
 
         function isValidUrl(string) {
             try {
