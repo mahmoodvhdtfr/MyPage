@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ارسال لینک</title>
+    <title>ارسال خودکار لینک به گیت‌هاب</title>
     <style>
-        /* استایل‌ها مثل قبل */
         body {
             font-family: Tahoma, Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -23,20 +22,14 @@
             border-radius: 20px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             width: 100%;
-            max-width: 550px;
+            max-width: 500px;
         }
         
         h2 {
             text-align: center;
             color: #333;
-            margin-bottom: 15px;
-        }
-        
-        .subtitle {
-            text-align: center;
-            color: #666;
             margin-bottom: 30px;
-            font-size: 14px;
+            font-size: 24px;
         }
         
         .form-group {
@@ -58,6 +51,13 @@
             font-size: 16px;
             box-sizing: border-box;
             direction: ltr;
+            transition: all 0.3s;
+        }
+        
+        input[type="url"]:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
         }
         
         button {
@@ -119,6 +119,13 @@
             background: #f8f9fa;
             border-radius: 15px;
             word-break: break-all;
+            border: 1px solid #dee2e6;
+        }
+        
+        .current-link strong {
+            color: #333;
+            display: block;
+            margin-bottom: 10px;
         }
         
         .link-box {
@@ -129,7 +136,6 @@
             color: #667eea;
             font-family: monospace;
             font-size: 14px;
-            margin-top: 10px;
             direction: ltr;
             text-align: left;
         }
@@ -172,8 +178,7 @@
 </head>
 <body>
     <div class="container">
-        <h2>🔗 ارسال لینک</h2>
-        <div class="subtitle">با هر بار ارسال، فایل link.txt آپدیت می‌شود</div>
+        <h2>⚡ ارسال خودکار لینک</h2>
         
         <form id="linkForm">
             <div class="form-group">
@@ -181,8 +186,8 @@
                 <input type="url" id="linkInput" placeholder="https://example.com/..." required>
             </div>
             <button type="submit" id="submitBtn">
-                <span>📤</span>
-                <span>ارسال لینک</span>
+                <span>💾</span>
+                <span>ذخیره خودکار در گیت‌هاب</span>
             </button>
         </form>
         
@@ -195,17 +200,22 @@
         
         <div class="status">
             <span class="dot"></span>
-            <span>سیستم فعال</span>
+            <span>سیستم فعال - ذخیره مستقیم در گیت‌هاب</span>
         </div>
         
         <div class="footer">
-            ⚡ لینک‌ها در گیت‌هاب ذخیره می‌شوند
+            ⚡ لینک‌ها مستقیماً در فایل link.txt ذخیره می‌شوند
         </div>
     </div>
 
+    <!-- فایل کانفیگ - توکن از اینجا میاد -->
+    <script src="config.js"></script>
+    
     <script>
-        // آدرس Web App گوگل
-        const PROXY_URL = 'https://script.google.com/macros/s/AKfycbzu01s-NXo-Ew6eBtOZPWE_v4hqI2mqD2hcAeCrbv-XjEYV9oza6XjWvgBOIfqYYElDHA/exec';
+        // اطلاعات مخزن
+        const REPO_OWNER = 'mahmoodvhdtfr';
+        const REPO_NAME = 'mahmoodvhdtfr.github.io';
+        const FILE_PATH = 'link/link.txt';
         
         // تابع بارگذاری لینک فعلی
         function loadCurrentLink() {
@@ -214,23 +224,64 @@
                     if (response.ok) {
                         return response.text();
                     }
-                    throw new Error('خطا در دریافت لینک');
+                    throw new Error('خطا');
                 })
                 .then(link => {
                     document.getElementById('currentLink').textContent = link.trim() || 'هنوز لینکی ثبت نشده';
                 })
-                .catch(error => {
+                .catch(() => {
                     document.getElementById('currentLink').textContent = 'خطا در دریافت لینک';
-                    console.error(error);
                 });
         }
 
-        // تابع ارسال لینک - با روش no-cors
-        document.getElementById('linkForm').addEventListener('submit', function(e) {
+        // تابع ذخیره لینک در گیت‌هاب
+        async function saveLinkToGitHub(link) {
+            try {
+                // ۱. دریافت SHA فایل فعلی
+                const getUrl = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${FILE_PATH}`;
+                const getResponse = await fetch(getUrl, {
+                    headers: {
+                        'Authorization': `token ${GITHUB_TOKEN}`,
+                        'Accept': 'application/vnd.github.v3+json'
+                    }
+                });
+                
+                const getData = await getResponse.json();
+                const sha = getData.sha;
+                
+                // ۲. آپدیت فایل با لینک جدید
+                const putUrl = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${FILE_PATH}`;
+                const content = btoa(link); // تبدیل به base64
+                
+                const putBody = {
+                    message: 'آپدیت خودکار لینک',
+                    content: content,
+                    sha: sha,
+                    branch: 'main'
+                };
+                
+                const putResponse = await fetch(putUrl, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `token ${GITHUB_TOKEN}`,
+                        'Accept': 'application/vnd.github.v3+json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(putBody)
+                });
+                
+                return putResponse.ok;
+            } catch (error) {
+                console.error('خطا در ذخیره:', error);
+                return false;
+            }
+        }
+
+        // رویداد ارسال فرم
+        document.getElementById('linkForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
             const link = document.getElementById('linkInput').value;
-            const messageDiv = document.getElementById('message');
             const submitBtn = document.getElementById('submitBtn');
             
             // اعتبارسنجی لینک
@@ -239,53 +290,35 @@
                 return;
             }
             
-            showMessage('⏳ در حال ذخیره لینک...', 'info');
+            showMessage('⏳ در حال ذخیره در گیت‌هاب...', 'info');
             submitBtn.disabled = true;
             
-            // ارسال به سرور واسط با no-cors
-            fetch(PROXY_URL, {
-                method: 'POST',
-                mode: 'no-cors',  // این خط مشکل CORS رو حل میکنه
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ link: link })
-            })
-            .then(() => {
-                // با no-cors نمیتونیم پاسخ رو ببینیم، پس فرض میکنیم موفق بوده
-                showMessage('✅ لینک ارسال شد! (در حال تایید...)', 'success');
+            // ذخیره لینک
+            const success = await saveLinkToGitHub(link);
+            
+            if (success) {
+                showMessage('✅ لینک با موفقیت در گیت‌هاب ذخیره شد!', 'success');
                 document.getElementById('linkInput').value = '';
-                
-                // چند ثانیه بعد لینک رو دوباره چک میکنیم
-                setTimeout(() => {
-                    loadCurrentLink();
-                    showMessage('✅ لینک با موفقیت ذخیره شد!', 'success');
-                }, 3000);
-            })
-            .catch(error => {
-                showMessage('❌ خطا در ارتباط با سرور', 'error');
-                console.error(error);
-            })
-            .finally(() => {
-                submitBtn.disabled = false;
-            });
+                setTimeout(loadCurrentLink, 1000);
+            } else {
+                showMessage('❌ خطا در ذخیره لینک', 'error');
+            }
+            
+            submitBtn.disabled = false;
         });
 
         // تابع نمایش پیام
         function showMessage(text, type) {
-            const messageDiv = document.getElementById('message');
-            messageDiv.textContent = text;
-            messageDiv.className = 'message ' + type;
-            
-            setTimeout(() => {
-                messageDiv.className = 'message';
-            }, 3000);
+            const msg = document.getElementById('message');
+            msg.textContent = text;
+            msg.className = 'message ' + type;
+            setTimeout(() => msg.className = 'message', 3000);
         }
 
         // بارگذاری اولیه
         window.addEventListener('load', loadCurrentLink);
         
-        // به‌روزرسانی خودکار هر 30 ثانیه
+        // به‌روزرسانی خودکار هر ۳۰ ثانیه
         setInterval(loadCurrentLink, 30000);
     </script>
 </body>
