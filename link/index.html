@@ -203,33 +203,37 @@
     </div>
 
     <script>
-        // اینجا آدرسی که از Google Apps Script گرفتی رو بذار
- https://script.google.com/macros/s/AKfycbzu01s-NXo-Ew6eBtOZPWE_v4hqI2mqD2hcAeCrbv-XjEYV9oza6XjWvgBOIfqYYElDHA/exec
-        // بارگذاری لینک فعلی
-        async function loadCurrentLink() {
-            try {
-                const response = await fetch(`/link/link.txt?t=${new Date().getTime()}`);
-                
-                if (response.ok) {
-                    const link = await response.text();
+        // آدرس Web App گوگل
+        const PROXY_URL = 'https://script.google.com/macros/s/AKfycbzu01s-NXo-Ew6eBtOZPWE_v4hqI2mqD2hcAeCrbv-XjEYV9oza6XjWvgBOIfqYYElDHA/exec';
+        
+        // تابع بارگذاری لینک فعلی
+        function loadCurrentLink() {
+            fetch(`/link/link.txt?t=${new Date().getTime()}`)
+                .then(response => {
+                    if (response.ok) {
+                        return response.text();
+                    }
+                    throw new Error('خطا در دریافت لینک');
+                })
+                .then(link => {
                     document.getElementById('currentLink').textContent = link.trim() || 'هنوز لینکی ثبت نشده';
-                } else {
+                })
+                .catch(error => {
                     document.getElementById('currentLink').textContent = 'خطا در دریافت لینک';
-                }
-            } catch (error) {
-                document.getElementById('currentLink').textContent = 'خطا در دریافت لینک';
-            }
+                    console.error(error);
+                });
         }
 
-        // ارسال لینک
-        document.getElementById('linkForm').addEventListener('submit', async function(e) {
+        // تابع ارسال لینک
+        document.getElementById('linkForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
             const link = document.getElementById('linkInput').value;
             const messageDiv = document.getElementById('message');
             const submitBtn = document.getElementById('submitBtn');
             
-            if (!isValidUrl(link)) {
+            // اعتبارسنجی لینک
+            if (!link.match(/^https?:\/\/.+/)) {
                 showMessage('❌ لطفاً یک لینک معتبر وارد کنید', 'error');
                 return;
             }
@@ -237,45 +241,34 @@
             showMessage('⏳ در حال ذخیره لینک...', 'info');
             submitBtn.disabled = true;
             
-            try {
-                const response = await fetch(PROXY_URL, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ link: link })
-                });
-                
-                if (response.ok) {
-                    const result = await response.json();
-                    if (result.success) {
-                        showMessage('✅ لینک با موفقیت ذخیره شد!', 'success');
-                        document.getElementById('linkInput').value = '';
-                        setTimeout(() => {
-                            loadCurrentLink();
-                        }, 2000);
-                    } else {
-                        showMessage('❌ خطا: ' + result.message, 'error');
-                    }
+            // ارسال به سرور واسط
+            fetch(PROXY_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ link: link })
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.success) {
+                    showMessage('✅ لینک با موفقیت ذخیره شد!', 'success');
+                    document.getElementById('linkInput').value = '';
+                    setTimeout(loadCurrentLink, 2000);
                 } else {
-                    showMessage('❌ خطا در ارتباط با سرور', 'error');
+                    showMessage('❌ خطا: ' + (result.message || 'خطای ناشناخته'), 'error');
                 }
-            } catch (error) {
-                showMessage('❌ خطا: ' + error.message, 'error');
-            } finally {
+            })
+            .catch(error => {
+                showMessage('❌ خطا در ارتباط با سرور', 'error');
+                console.error(error);
+            })
+            .finally(() => {
                 submitBtn.disabled = false;
-            }
+            });
         });
 
-        function isValidUrl(string) {
-            try {
-                new URL(string);
-                return true;
-            } catch (_) {
-                return false;
-            }
-        }
-
+        // تابع نمایش پیام
         function showMessage(text, type) {
             const messageDiv = document.getElementById('message');
             messageDiv.textContent = text;
@@ -288,6 +281,8 @@
 
         // بارگذاری اولیه
         window.addEventListener('load', loadCurrentLink);
+        
+        // به‌روزرسانی خودکار هر 30 ثانیه
         setInterval(loadCurrentLink, 30000);
     </script>
 </body>
