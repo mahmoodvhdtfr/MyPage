@@ -236,36 +236,49 @@
             debugContent.textContent += new Date().toLocaleTimeString() + ': ' + message + '\n';
         }
 
-        // بارگذاری لینک فعلی
-        async function loadCurrentLink() {
-            try {
-                addDebug('تلاش برای دریافت لینک از گیت‌هاب...');
-                // استفاده از raw.githubusercontent.com برای خواندن فایل
-                const url = `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${GITHUB_REPO}/main/${LINK_FILE_PATH}?t=${new Date().getTime()}`;
-                addDebug('آدرس درخواست: ' + url);
+// بارگذاری لینک فعلی - خواندن مستقیم از دامنه خودتان
+async function loadCurrentLink() {
+    try {
+        addDebug('تلاش برای دریافت لینک از دامنه خودتان...');
+        // استفاده از آدرس مستقیم فایل در دامنه خودتان
+        const url = `/link/link.txt?t=${new Date().getTime()}`;
+        addDebug('آدرس درخواست: ' + window.location.origin + url);
+        
+        const response = await fetch(url);
+        addDebug('وضعیت پاسخ: ' + response.status);
+        
+        if (response.ok) {
+            const link = await response.text();
+            addDebug('لینک دریافت شد: ' + link);
+            document.getElementById('currentLink').textContent = link.trim() || 'هنوز لینکی ثبت نشده';
+        } else {
+            addDebug('خطا در دریافت فایل: ' + response.status);
+            if (response.status === 404) {
+                document.getElementById('currentLink').textContent = 'فایل link.txt یافت نشد (خطای 404)';
                 
-                const response = await fetch(url);
-                addDebug('وضعیت پاسخ: ' + response.status);
+                // تلاش با آدرس absolute
+                addDebug('تلاش مجدد با آدرس absolute...');
+                const absoluteUrl = `https://mahmoodvhdtfr.ir/link/link.txt?t=${new Date().getTime()}`;
+                const response2 = await fetch(absoluteUrl);
                 
-                if (response.ok) {
-                    const link = await response.text();
-                    addDebug('لینک دریافت شد: ' + link);
-                    document.getElementById('currentLink').textContent = link.trim() || 'هنوز لینکی ثبت نشده';
+                if (response2.ok) {
+                    const link2 = await response2.text();
+                    document.getElementById('currentLink').textContent = link2.trim() || 'هنوز لینکی ثبت نشده';
+                    addDebug('با آدرس absolute موفق بود: ' + link2);
                 } else {
-                    addDebug('خطا در دریافت فایل: ' + response.status);
-                    if (response.status === 404) {
-                        document.getElementById('currentLink').textContent = 'فایل link/link.txt یافت نشد';
-                        addDebug('فایل link/link.txt وجود ندارد. لطفاً آن را ایجاد کنید.');
-                    } else {
-                        document.getElementById('currentLink').textContent = 'خطا در دریافت لینک';
-                    }
+                    document.getElementById('currentLink').textContent = 'فایل link.txt یافت نشد';
+                    addDebug('آدرس absolute هم کار نکرد: ' + response2.status);
                 }
-            } catch (error) {
-                addDebug('خطای شبکه: ' + error.message);
-                console.error('خطا:', error);
+            } else {
                 document.getElementById('currentLink').textContent = 'خطا در دریافت لینک';
             }
         }
+    } catch (error) {
+        addDebug('خطای شبکه: ' + error.message);
+        console.error('خطا:', error);
+        document.getElementById('currentLink').textContent = 'خطا در دریافت لینک: ' + error.message;
+    }
+}
 
         // ارسال فرم - ایجاد Issue
         document.getElementById('linkForm').addEventListener('submit', async function(e) {
