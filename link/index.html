@@ -208,12 +208,10 @@
         </div>
     </div>
 
-    <!-- فایل کانفیگ - توکن از اینجا میاد -->
     <script>
-    const GITHUB_TOKEN = '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';
-</script>
-    
-    <script>
+        // ✅ توکن جدید - مستقیم توی کد برای تست
+        const GITHUB_TOKEN = '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';
+        
         // اطلاعات مخزن
         const REPO_OWNER = 'mahmoodvhdtfr';
         const REPO_NAME = 'mahmoodvhdtfr.github.io';
@@ -248,6 +246,11 @@
                     }
                 });
                 
+                if (!getResponse.ok) {
+                    console.error('خطا در دریافت SHA:', getResponse.status);
+                    return false;
+                }
+                
                 const getData = await getResponse.json();
                 const sha = getData.sha;
                 
@@ -272,7 +275,12 @@
                     body: JSON.stringify(putBody)
                 });
                 
-                return putResponse.ok;
+                if (putResponse.ok) {
+                    return true;
+                } else {
+                    console.error('خطا در آپدیت:', await putResponse.json());
+                    return false;
+                }
             } catch (error) {
                 console.error('خطا در ذخیره:', error);
                 return false;
