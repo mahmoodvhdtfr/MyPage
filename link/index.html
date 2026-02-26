@@ -3,222 +3,107 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ارسال لینک - نسخه نهایی</title>
+    <title>ارسال لینک | محمود وحدتی‌فر</title>
     <style>
         body {
-            font-family: Tahoma, Arial, sans-serif;
-            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-            min-height: 100vh;
+            font-family: 'Tahoma', sans-serif;
+            background-color: #f0f2f5;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            height: 100vh;
             margin: 0;
         }
-        
         .container {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            width: 100%;
-            max-width: 500px;
-        }
-        
-        h2 {
-            text-align: center;
-            color: #333;
-            margin-bottom: 30px;
-            font-size: 24px;
-        }
-        
-        .form-group {
-            margin-bottom: 25px;
-        }
-        
-        label {
-            display: block;
-            margin-bottom: 10px;
-            color: #444;
-            font-weight: bold;
-        }
-        
-        input[type="url"] {
-            width: 100%;
-            padding: 15px;
-            border: 2px solid #e0e0e0;
-            border-radius: 12px;
-            font-size: 16px;
-            box-sizing: border-box;
-            direction: ltr;
-        }
-        
-        button {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 16px 25px;
-            border: none;
-            border-radius: 12px;
-            cursor: pointer;
-            width: 100%;
-            font-size: 18px;
-            font-weight: bold;
-            transition: all 0.3s;
-        }
-        
-        button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
-        }
-        
-        .message {
-            margin-top: 20px;
-            padding: 15px;
-            border-radius: 12px;
-            display: none;
-            text-align: center;
-            font-weight: 500;
-        }
-        
-        .success {
-            background: #d4edda;
-            color: #155724;
-            display: block;
-        }
-        
-        .error {
-            background: #f8d7da;
-            color: #721c24;
-            display: block;
-        }
-        
-        .info {
-            background: #d1ecf1;
-            color: #0c5460;
-            display: block;
-        }
-        
-        .current-link {
-            margin-top: 30px;
-            padding: 20px;
-            background: #f8f9fa;
-            border-radius: 15px;
-            word-break: break-all;
-        }
-        
-        .link-box {
             background: white;
-            padding: 15px;
-            border-radius: 10px;
-            border: 1px dashed #667eea;
-            color: #667eea;
-            font-family: monospace;
-            font-size: 14px;
-            margin-top: 10px;
-            direction: ltr;
-            text-align: left;
-        }
-        
-        .status {
-            margin-top: 20px;
-            padding: 10px;
-            background: rgba(102, 126, 234, 0.1);
-            border-radius: 50px;
-            color: #667eea;
-            font-size: 14px;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
             text-align: center;
+            width: 90%;
+            max-width: 400px;
         }
+        h2 { color: #333; margin-bottom: 1.5rem; }
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-sizing: border-box;
+            outline: none;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        button:hover { background-color: #0056b3; }
+        #resultStatus {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            min-height: 20px;
+        }
+        .success { color: green; }
+        .error { color: red; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h2>🚀 ارسال لینک - قطعی</h2>
-        
-        <form id="linkForm">
-            <div class="form-group">
-                <label for="linkInput">🔗 لینک جدید:</label>
-                <input type="url" id="linkInput" placeholder="https://example.com/..." required>
-            </div>
-            <button type="submit" id="submitBtn">
-                <span>💾</span>
-                <span>ذخیره کن</span>
-            </button>
-        </form>
-        
-        <div id="message" class="message"></div>
-        
-        <div class="current-link">
-            <strong>📌 آخرین لینک:</strong>
-            <div id="currentLink" class="link-box">در حال بارگذاری...</div>
-        </div>
-        
-        <div class="status">
-            ⚡ ذخیره در سرور ابری - بدون مشکل CORS و توکن
-        </div>
-    </div>
 
-    <script>
-        // این آی‌دی رو از jsonstorage.net بگیر
-        const STORAGE_ID = 'a4091eb0-c833-4f7d-aa4c-fc2fc5720c68';
-        
-        // بارگذاری لینک فعلی
-        function loadCurrentLink() {
-            fetch(`https://api.jsonstorage.net/v1/json/${STORAGE_ID}?t=${new Date().getTime()}`)
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById('currentLink').textContent = data.link || 'هنوز لینکی ثبت نشده';
-                })
-                .catch(() => {
-                    document.getElementById('currentLink').textContent = 'خطا در دریافت لینک';
-                });
-        }
+<div class="container">
+    <h2>افزودن لینک جدید</h2>
+    <input type="url" id="linkInput" placeholder="https://example.com" required>
+    <button id="sendBtn" onclick="sendToGithub()">ذخیره در فایل</button>
+    <p id="resultStatus"></p>
+</div>
 
-        // ذخیره لینک جدید
-        document.getElementById('linkForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            const link = document.getElementById('linkInput').value;
-            const submitBtn = document.getElementById('submitBtn');
-            
-            if (!link.match(/^https?:\/\/.+/)) {
-                showMessage('❌ لینک معتبر نیست', 'error');
-                return;
-            }
-            
-            showMessage('⏳ در حال ذخیره...', 'info');
-            submitBtn.disabled = true;
-            
-            try {
-                const response = await fetch(`https://api.jsonstorage.net/v1/json/${STORAGE_ID}`, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ link: link })
-                });
-                
-                if (response.ok) {
-                    showMessage('✅ لینک ذخیره شد!', 'success');
-                    document.getElementById('linkInput').value = '';
-                    loadCurrentLink();
-                } else {
-                    showMessage('❌ خطا در ذخیره', 'error');
-                }
-            } catch (error) {
-                showMessage('❌ خطا: ' + error.message, 'error');
-            }
-            
-            submitBtn.disabled = false;
+<script>
+async function sendToGithub() {
+    const inputField = document.getElementById('linkInput');
+    const statusText = document.getElementById('resultStatus');
+    const btn = document.getElementById('sendBtn');
+    const url = inputField.value.trim();
+
+    if (!url) {
+        alert("لطفاً یک لینک معتبر وارد کنید!");
+        return;
+    }
+
+    // غیرفعال کردن دکمه هنگام ارسال
+    btn.disabled = true;
+    statusText.className = "";
+    statusText.innerText = "⏳ در حال اتصال به سرور و گیت‌هاب...";
+
+    try {
+        const response = await fetch("https://link-saver.m-vahdatfar.workers.dev/", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ newLink: url })
         });
 
-        function showMessage(text, type) {
-            const msg = document.getElementById('message');
-            msg.textContent = text;
-            msg.className = 'message ' + type;
-            setTimeout(() => msg.className = 'message', 3000);
+        if (response.ok) {
+            statusText.className = "success";
+            statusText.innerText = "✅ لینک با موفقیت در link.txt ذخیره شد!";
+            inputField.value = ""; 
+        } else {
+            const errorMsg = await response.text();
+            statusText.className = "error";
+            statusText.innerText = "❌ خطا: " + errorMsg;
         }
+    } catch (error) {
+        statusText.className = "error";
+        statusText.innerText = "❌ خطای شبکه: " + error.message;
+    } finally {
+        btn.disabled = false;
+    }
+}
+</script>
 
-        window.addEventListener('load', loadCurrentLink);
-    </script>
 </body>
 </html>
